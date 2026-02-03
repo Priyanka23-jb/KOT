@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { loginSuccess } from '../authSlice';
 
 export default function LoginForm() {
@@ -76,12 +76,14 @@ export default function LoginForm() {
           <p className="text-xs text-red-600 text-center">{error}</p>
         )}
 
-        {/* Forgot */}
-        <div
-          onClick={() => navigate('../components/forgotform.jsx')}
-          className="text-right text-xs text-gray-500 hover:text-red-600 cursor-pointer"
-        >
-          Forgot Password?
+        {/* Forgot Password */}
+        <div className="text-right">
+          <Link
+            to="/forgot-password"
+            className="text-xs text-gray-500 hover:text-red-600"
+          >
+            Forgot Password?
+          </Link>
         </div>
 
         {/* Login Button */}
@@ -92,7 +94,7 @@ export default function LoginForm() {
           Log in
         </button>
 
-        {/* Register */}
+        {/* Register (optional future route) */}
         <button
           type="button"
           className="w-full border border-red-600 text-red-600 py-2 rounded-md font-semibold hover:bg-red-50 transition"
@@ -107,7 +109,7 @@ export default function LoginForm() {
           <div className="flex-1 h-px bg-gray-300" />
         </div>
 
-        {/* Google (demo) */}
+        {/* Google Login (demo) */}
         <button
           type="button"
           onClick={() => {

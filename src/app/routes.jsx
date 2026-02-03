@@ -6,14 +6,23 @@ import AuthLayout from '../layout/AuthLayout';
 import DashboardLayout from '../layout/DashboardLayout';
 
 import Login from '../features/auth/pages/Login';
+import ForgotPassword from '../features/auth/pages/forgot';
 import Dashboard from '../features/dashboard/pages/Dashboard';
 
-// Order & Master pages (we’ll create stubs below)
+// Orders
 import Orders from '../features/oders/pages/Orders';
-import EmployeeManagement from '../features/master/pages/EmployeeManagement';
-import PriceManagement from '../features/master/pages/PriceManagement';
-import TicketDesign from '../features/master/pages/TicketDesign';
-// import Reports from '../features/reports/pages/Reports';
+
+// Users (separate, NOT in master)
+import Users from '../features/users/pages/users';
+
+// Master Management
+import Tables from '../features/master/pages/Tables';
+import Categories from '../features/master/pages/Categories';
+import Items from '../features/master/pages/Items';
+import Taxes from '../features/master/pages/Taxes';
+
+// Reports
+import ProfitLoss from '../features/reports/pages/ProfitLoss';
 
 /**
  * 🔐 Auth Guard
@@ -40,6 +49,7 @@ export default function AppRoutes() {
       {/* ================= PUBLIC ROUTES ================= */}
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<Login />} />
+         <Route path="/forgot-password" element={<ForgotPassword />} />
       </Route>
 
       {/* ================= PROTECTED ROUTES ================= */}
@@ -48,17 +58,17 @@ export default function AppRoutes() {
 
           {/* MAIN */}
           <Route path="/dashboard" element={<Dashboard />} />
-
-          {/* ORDER MANAGEMENT */}
           <Route path="/orders" element={<Orders />} />
+          <Route path="/users" element={<Users />} />
 
           {/* MASTER MANAGEMENT */}
-          <Route path="/master/employee" element={<EmployeeManagement />} />
-          <Route path="/master/price" element={<PriceManagement />} />
-          <Route path="/master/ticket-design" element={<TicketDesign />} />
+          <Route path="/master/tables" element={<Tables />} />
+          <Route path="/master/categories" element={<Categories />} />
+          <Route path="/master/items" element={<Items />} />
+          <Route path="/master/taxes" element={<Taxes />} />
 
-          {/* REPORT */}
-          {/* <Route path="/reports" element={<Reports />} /> */}
+          {/* REPORTS */}
+          <Route path="/reports/profit-loss" element={<ProfitLoss />} />
 
         </Route>
       </Route>

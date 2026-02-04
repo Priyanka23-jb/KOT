@@ -12,10 +12,9 @@ export default function SidebarItem({
       to={to}
       className={({ isActive }) =>
         `flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium transition
-        ${
-          isActive
-            ? 'bg-blue-600 text-white'
-            : 'text-gray-700 hover:bg-gray-100'
+        ${isActive
+          ? "bg-purple-600 text-white font-medium"
+          : "text-gray-700 hover:bg-gray-50 hover:text-purple-600"
         }`
       }
     >

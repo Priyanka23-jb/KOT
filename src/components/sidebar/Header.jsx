@@ -6,7 +6,7 @@ import { useAuth } from "../../hooks/useAuth.js";
 
 /**
  * Restaurant Management Dashboard – Header
- * Clean, modern restaurant theme with orange/neutral colors
+ * Elegant purple theme with neutral colors
  */
 const Header = ({ onSidebarToggle, onMobileSidebarToggle }) => {
   const [openUser, setOpenUser] = useState(false);
@@ -101,7 +101,7 @@ const Header = ({ onSidebarToggle, onMobileSidebarToggle }) => {
           {/* Mobile toggle */}
           <button
             onClick={onMobileSidebarToggle}
-            className="md:hidden p-2 rounded-lg hover:bg-orange-50 text-gray-700"
+            className="md:hidden p-2 rounded-lg hover:bg-purple-50 text-gray-700"
             aria-label="Toggle mobile sidebar"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -112,7 +112,7 @@ const Header = ({ onSidebarToggle, onMobileSidebarToggle }) => {
           {/* Desktop toggle */}
           <button
             onClick={onSidebarToggle}
-            className="hidden md:flex p-2 rounded-lg hover:bg-orange-50 text-gray-700"
+            className="hidden md:flex p-2 rounded-lg hover:bg-purple-50 text-gray-700"
             aria-label="Toggle sidebar"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -157,7 +157,7 @@ const Header = ({ onSidebarToggle, onMobileSidebarToggle }) => {
           <div className="relative" ref={notifRef}>
             <button
               onClick={() => setOpenNotifications(!openNotifications)}
-              className="p-2 rounded-lg hover:bg-orange-50 text-gray-700 relative"
+              className="p-2 rounded-lg hover:bg-purple-50 text-gray-700 relative"
               aria-label="Notifications"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -170,7 +170,7 @@ const Header = ({ onSidebarToggle, onMobileSidebarToggle }) => {
               </svg>
 
               {notifications.length > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 text-xs font-medium bg-orange-500 text-white rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 w-5 h-5 text-xs font-medium bg-purple-600 text-white rounded-full flex items-center justify-center">
                   {notifications.length}
                 </span>
               )}
@@ -188,7 +188,7 @@ const Header = ({ onSidebarToggle, onMobileSidebarToggle }) => {
                     <div key={n.id} className="px-4 py-3 border-b border-gray-100 hover:bg-gray-50">
                       <div className="flex items-start">
                         <div className={`w-2 h-2 mt-1.5 rounded-full mr-3 ${
-                          n.type === 'order' ? 'bg-green-500' :
+                          n.type === 'order' ? 'bg-purple-500' :
                           n.type === 'inventory' ? 'bg-red-500' : 'bg-blue-500'
                         }`} />
                         <div>
@@ -200,7 +200,7 @@ const Header = ({ onSidebarToggle, onMobileSidebarToggle }) => {
                   ))}
                 </div>
                 <div className="px-4 py-2 border-t border-gray-100 bg-gray-50">
-                  <button className="text-sm text-orange-600 hover:text-orange-700 font-medium">
+                  <button className="text-sm text-purple-600 hover:text-purple-700 font-medium">
                     View all notifications
                   </button>
                 </div>
@@ -212,11 +212,11 @@ const Header = ({ onSidebarToggle, onMobileSidebarToggle }) => {
           <div className="relative" ref={settingsRef}>
             <button
               onClick={() => setOpenUser(!openUser)}
-              className="flex items-center gap-3 p-2 rounded-lg hover:bg-orange-50"
+              className="flex items-center gap-3 p-2 rounded-lg hover:bg-purple-50"
               aria-label="User menu"
             >
-              <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                <span className="text-orange-600 font-semibold text-sm">
+              <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                <span className="text-purple-600 font-semibold text-sm">
                   {user?.fullName?.[0] || user?.email?.[0] || 'U'}
                 </span>
               </div>
@@ -238,7 +238,7 @@ const Header = ({ onSidebarToggle, onMobileSidebarToggle }) => {
                     {user?.fullName || 'Restaurant Manager'}
                   </p>
                   <p className="text-xs text-gray-500 truncate">{user?.email}</p>
-                  <p className="text-xs text-orange-600 font-medium mt-1">Restaurant Administrator</p>
+                  <p className="text-xs text-purple-600 font-medium mt-1">Restaurant Administrator</p>
                 </div>
 
                 <div className="p-2 space-y-1">

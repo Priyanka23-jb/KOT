@@ -8,7 +8,7 @@ export default function DashboardLayout() {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-screen bg-[#FFF7F4]">
+    <div className="flex h-screen bg-[#FFF7F4] dark:bg-gray-900 transition-colors duration-200">
       {/* MOBILE SIDEBAR */}
       {isMobileSidebarOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
@@ -16,7 +16,7 @@ export default function DashboardLayout() {
             className="absolute inset-0 bg-black/50"
             onClick={() => setIsMobileSidebarOpen(false)}
           />
-          <div className="relative w-72 h-full bg-white shadow-xl">
+          <div className="relative w-72 h-full bg-white dark:bg-gray-800 shadow-xl transition-colors duration-200">
             <Sidebar isCollapsed={false} isMobile />
           </div>
         </div>
@@ -39,8 +39,8 @@ export default function DashboardLayout() {
           }
         />
 
-        <main className="flex-1 overflow-y-auto p-6">
-          <div className="max-w-7xl mx-auto space-y-8">
+        <main className="flex-1 overflow-y-auto p-6 bg-[#FFF7F4] dark:bg-gray-900 transition-colors duration-200">
+          <div className="w-full space-y-8">
             <Outlet />
           </div>
         </main>

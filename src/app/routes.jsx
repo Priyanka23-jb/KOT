@@ -1,28 +1,29 @@
-import React from 'react';
-import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { Routes, Route, Navigate, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import AuthLayout from '../layout/AuthLayout';
-import DashboardLayout from '../layout/DashboardLayout';
+import AuthLayout from "../layout/AuthLayout";
+import DashboardLayout from "../layout/DashboardLayout";
 
-import Login from '../features/auth/pages/Login';
-import ForgotPassword from '../features/auth/pages/forgot';
-import Dashboard from '../features/dashboard/pages/Dashboard';
+// Auth
+import Login from "../features/auth/pages/Login";
+import ForgotPassword from "../features/auth/pages/forgot";
 
-// Orders
-import Orders from '../features/oders/pages/Orders';
+// Dashboard
+import Dashboard from "../features/dashboard/pages/Dashboard";
 
-// Users (separate, NOT in master)
-import Users from '../features/users/pages/users';
+// Pages (create these as stubs if not done yet)
+import Customer from "../features/customer/pages/Customer";
+import Vendor from "../features/Vendor/pages/Vendor";
+import Technician from "../features/Technician/pages/Technician";
+import Auditor from "../features/Auditor/pages/Auditor";
+import Subadmin from "../features/Subadmin/pages/Subadmin";
+import Help from "../features/help/pages/help";
 
-// Master Management
-import Tables from '../features/master/pages/Tables';
-import Categories from '../features/master/pages/Categories';
-import Items from '../features/master/pages/Items';
-import Taxes from '../features/master/pages/Taxes';
-
-// Reports
-import ProfitLoss from '../features/reports/pages/ProfitLoss';
+// Master
+// import LocationManagement from "../features/master/pages/LocationManagement";
+// import Categories from "../features/master/pages/Categories";
+// import Items from "../features/master/pages/Items";
 
 /**
  * 🔐 Auth Guard
@@ -40,40 +41,45 @@ function RequireAuth() {
 }
 
 /**
- * ✅ ALL ROUTES
+ * ✅ ROUTES (MATCHES SIDEBAR)
  */
 export default function AppRoutes() {
   return (
     <Routes>
 
-      {/* ================= PUBLIC ROUTES ================= */}
+      {/* ========== PUBLIC ROUTES ========== */}
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<Login />} />
-         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Route>
 
-      {/* ================= PROTECTED ROUTES ================= */}
+      {/* ========== PROTECTED ROUTES ========== */}
       <Route element={<RequireAuth />}>
         <Route element={<DashboardLayout />}>
 
           {/* MAIN */}
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/users" element={<Users />} />
 
-          {/* MASTER MANAGEMENT */}
-          <Route path="/master/tables" element={<Tables />} />
-          <Route path="/master/categories" element={<Categories />} />
-          <Route path="/master/items" element={<Items />} />
-          <Route path="/master/taxes" element={<Taxes />} />
+          {/* SIDEBAR PAGES */}
+          <Route path="/customer" element={<Customer />} />
+          <Route path="/vendor" element={<Vendor />} />
+          <Route path="/technician" element={<Technician />} />
+          <Route path="/auditor" element={<Auditor />} />
+          <Route path="/subadmin" element={<Subadmin />} />
+          <Route path="/help" element={<Help />} />
 
-          {/* REPORTS */}
-          <Route path="/reports/profit-loss" element={<ProfitLoss />} />
+          {/* MASTER */}
+          {/* <Route
+            path="/master/location-management"
+            element={<LocationManagement />}
+          />
+          <Route path="/master/category" element={<Categories />} />
+          <Route path="/master/item" element={<Items />} /> */}
 
         </Route>
       </Route>
 
-      {/* ================= FALLBACK ================= */}
+      {/* ========== FALLBACK ========== */}
       <Route path="*" element={<Navigate to="/login" replace />} />
 
     </Routes>

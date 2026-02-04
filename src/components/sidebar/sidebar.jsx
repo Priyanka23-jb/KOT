@@ -5,9 +5,6 @@ import { ChevronDown } from "lucide-react";
 export default function Sidebar() {
   const [openSections, setOpenSections] = useState({
     master: false,
-    reports: false,
-    compliances: false,
-    audits: false,
     settings: false
   });
 
@@ -19,10 +16,10 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="w-64 bg-white text-gray-800 h-full border-r border-gray-200">
+    <aside className="w-64 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 h-full border-r border-gray-200 dark:border-gray-700 transition-colors duration-200">
       {/* Logo */}
-      <div className="p-6 text-lg font-semibold border-b border-gray-200">
-        <span className="text-purple-600 font-bold text-xl">Dashboard</span>
+      <div className="p-6 text-lg font-semibold border-b border-gray-200 dark:border-gray-700">
+        <span className="text-purple-600 dark:text-purple-400 font-bold text-xl">Dashboard</span>
       </div>
 
       <nav className="p-4 space-y-0.5">
@@ -33,143 +30,70 @@ export default function Sidebar() {
           active={true}
         />
 
-        {/* Assets */}
+        {/* Customer */}
         <SidebarItem 
-          to="/assets" 
-          label="Assets"
+          to="/customer" 
+          label="Customer"
         />
 
-        {/* Customers */}
+        {/* Vendor */}
         <SidebarItem 
-          to="/customers" 
-          label="Customers"
+          to="/vendor" 
+          label="Vendor"
         />
 
-        {/* Sites */}
+        {/* Technician */}
         <SidebarItem 
-          to="/sites" 
-          label="Sites"
+          to="/technician" 
+          label="Technician"
         />
 
-        {/* Work Orders */}
+        {/* Auditor */}
         <SidebarItem 
-          to="/work-orders" 
-          label="Work Orders"
+          to="/auditor" 
+          label="Auditor"
         />
 
-        {/* ================= COMPLIANCES ================= */}
+        {/* Subadmin */}
+        <SidebarItem 
+          to="/subadmin" 
+          label="Subadmin"
+        />
+
+        {/* ================= MASTER ================= */}
         <div>
           <button
-            onClick={() => toggleSection("compliances")}
+            onClick={() => toggleSection("master")}
             className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all ${
-              openSections.compliances ? "bg-purple-50 text-purple-600" : "hover:bg-gray-50"
+              openSections.master 
+                ? "bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-300" 
+                : "hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
             }`}
           >
-            <span className="font-medium">Compliances</span>
+            <span className="font-medium">Master</span>
             <ChevronDown
               size={16}
               className={`transition-transform ${
-                openSections.compliances ? "rotate-180" : ""
+                openSections.master ? "rotate-180" : ""
               }`}
             />
           </button>
 
-          {openSections.compliances && (
-            <div className="ml-4 border-l border-gray-200 pl-3 space-y-0.5 mt-0.5">
+          {openSections.master && (
+            <div className="ml-4 border-l border-gray-200 dark:border-gray-600 pl-3 space-y-0.5 mt-0.5">
               <SidebarItem 
-                to="/compliances/regulatory" 
-                label="Regulatory"
+                to="/master/location-management" 
+                label="Location Management"
                 indent={true}
               />
               <SidebarItem 
-                to="/compliances/safety" 
-                label="Safety"
+                to="/master/category" 
+                label="Category"
                 indent={true}
               />
               <SidebarItem 
-                to="/compliances/environmental" 
-                label="Environmental"
-                indent={true}
-              />
-            </div>
-          )}
-        </div>
-
-        {/* ================= AUDITS ================= */}
-        <div>
-          <button
-            onClick={() => toggleSection("audits")}
-            className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all ${
-              openSections.audits ? "bg-purple-50 text-purple-600" : "hover:bg-gray-50"
-            }`}
-          >
-            <span className="font-medium">Audits</span>
-            <ChevronDown
-              size={16}
-              className={`transition-transform ${
-                openSections.audits ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-
-          {openSections.audits && (
-            <div className="ml-4 border-l border-gray-200 pl-3 space-y-0.5 mt-0.5">
-              <SidebarItem 
-                to="/audits/internal" 
-                label="Internal"
-                indent={true}
-              />
-              <SidebarItem 
-                to="/audits/external" 
-                label="External"
-                indent={true}
-              />
-              <SidebarItem 
-                to="/audits/compliance" 
-                label="Compliance"
-                indent={true}
-              />
-            </div>
-          )}
-        </div>
-
-        {/* ================= REPORTS ================= */}
-        <div>
-          <button
-            onClick={() => toggleSection("reports")}
-            className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all ${
-              openSections.reports ? "bg-purple-50 text-purple-600" : "hover:bg-gray-50"
-            }`}
-          >
-            <span className="font-medium">Reports</span>
-            <ChevronDown
-              size={16}
-              className={`transition-transform ${
-                openSections.reports ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-
-          {openSections.reports && (
-            <div className="ml-4 border-l border-gray-200 pl-3 space-y-0.5 mt-0.5">
-              <SidebarItem 
-                to="/reports/financial" 
-                label="Financial"
-                indent={true}
-              />
-              <SidebarItem 
-                to="/reports/operational" 
-                label="Operational"
-                indent={true}
-              />
-              <SidebarItem 
-                to="/reports/compliance" 
-                label="Compliance"
-                indent={true}
-              />
-              <SidebarItem 
-                to="/reports/analytics" 
-                label="Analytics"
+                to="/master/item" 
+                label="Item"
                 indent={true}
               />
             </div>
@@ -177,42 +101,7 @@ export default function Sidebar() {
         </div>
 
         {/* ================= SETTINGS ================= */}
-        <div>
-          <button
-            onClick={() => toggleSection("settings")}
-            className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all ${
-              openSections.settings ? "bg-purple-50 text-purple-600" : "hover:bg-gray-50"
-            }`}
-          >
-            <span className="font-medium">Settings</span>
-            <ChevronDown
-              size={16}
-              className={`transition-transform ${
-                openSections.settings ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-
-          {openSections.settings && (
-            <div className="ml-4 border-l border-gray-200 pl-3 space-y-0.5 mt-0.5">
-              <SidebarItem 
-                to="/settings/user-management" 
-                label="User Management"
-                indent={true}
-              />
-              <SidebarItem 
-                to="/settings/permissions" 
-                label="Permissions"
-                indent={true}
-              />
-              <SidebarItem 
-                to="/settings/configuration" 
-                label="Configuration"
-                indent={true}
-              />
-            </div>
-          )}
-        </div>
+        
 
         {/* Help */}
         <SidebarItem 

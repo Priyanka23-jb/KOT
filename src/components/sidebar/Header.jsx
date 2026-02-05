@@ -17,12 +17,12 @@ const Header = ({ onSidebarToggle, onMobileSidebarToggle }) => {
   const { logout } = useAuth();
 
   /* =======================
-     Page context for Restaurant Dashboard
+     Page context for Compliance Dashboard
      ======================= */
   const pageMeta = {
     "/dashboard": {
       title: "Compliance Dashboard",
-      subtitle: "Real-time overview of orders, revenue & staff",
+      subtitle: "Real-time visibility into compliance, audits & personnel",
     },
     // "/orders": {
     //   title: "Order Management",
@@ -44,8 +44,8 @@ const Header = ({ onSidebarToggle, onMobileSidebarToggle }) => {
 
   const current =
     pageMeta[location.pathname] || {
-      title: "Restaurant Dashboard",
-      subtitle: "Manage your restaurant operations",
+      title: "Compliance Dashboard",
+      subtitle: "Manage your compliance operations",
     };
 
   return (

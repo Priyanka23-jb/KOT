@@ -74,17 +74,17 @@ export default function Dashboard() {
 
             {/* BEEF BURGER CARD */}
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-200">
-              <p className="text-sm text-gray-500 dark:text-gray-400">Beef Burger</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Best Compliance Replacements</p>
               <p className="text-3xl font-semibold mt-2 text-gray-900 dark:text-white">1,850</p>
               <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-                1850 Active Contracts
+                1850 Active Compliance Contracts
               </p>
               <div className="flex items-center justify-between mt-3">
                 <span className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                  Asivee City Dvadr Eed (Dert All)
+                  Active Compliance Agreements
                 </span>
                 <span className="text-xs font-semibold text-purple-600 dark:text-purple-400">
-                  Meret
+                   Records
                 </span>
               </div>
             </div>
@@ -95,7 +95,7 @@ export default function Dashboard() {
             {/* PENDING WORK ORDERS - LARGE */}
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-200">
               <div className="flex justify-between items-center mb-4">
-                <p className="text-sm text-gray-500 dark:text-gray-400">Pending Work Orders</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Open Compliance Issues</p>
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-semibold text-gray-900 dark:text-white">120 Open Jobs</span>
                   <span className="text-xs text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
@@ -241,7 +241,7 @@ export default function Dashboard() {
 
           {/* WORK ORDERS LIST */}
           <div className="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-200">
-            <h3 className="font-medium mb-4 text-gray-900 dark:text-white">Pending Work Orders</h3>
+            <h3 className="font-medium mb-4 text-gray-900 dark:text-white">Pending Compliance Actions</h3>
             
             <div className="space-y-4">
               <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">

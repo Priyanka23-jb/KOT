@@ -38,7 +38,7 @@ export default function LoginForm() {
     <div>
       {/* Logo */}
       <div className="flex justify-center mb-6">
-        <div className="w-14 h-14 rounded-full bg-red-600 flex items-center justify-center text-white font-bold text-lg">
+        <div className="w-14 h-14 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold text-lg">
           R
         </div>
       </div>
@@ -87,7 +87,7 @@ export default function LoginForm() {
         {/* Login Button */}
         <button
           type="submit"
-          className="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-md font-semibold transition"
+          className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-md font-semibold transition"
         >
           Log in
         </button>
@@ -95,20 +95,20 @@ export default function LoginForm() {
         {/* Register */}
         <button
           type="button"
-          className="w-full border border-red-600 text-red-600 py-2 rounded-md font-semibold hover:bg-red-50 transition"
+          className="w-full border border-purple-600 text-purple-600 py-2 rounded-md font-semibold hover:bg-purple -50 transition"
         >
           Register
         </button>
 
         {/* Divider */}
-        <div className="flex items-center gap-2 text-xs text-gray-400">
+        {/* <div className="flex items-center gap-2 text-xs text-gray-400">
           <div className="flex-1 h-px bg-gray-300" />
           OR
           <div className="flex-1 h-px bg-gray-300" />
-        </div>
+        </div> */}
 
         {/* Google (demo) */}
-        <button
+        {/* <button
           type="button"
           onClick={() => {
             dispatch(
@@ -127,7 +127,7 @@ export default function LoginForm() {
             alt="google"
           />
           <span className="text-sm">Log in with Google</span>
-        </button>
+        </button> */}   
       </form>
     </div>
   );

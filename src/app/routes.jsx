@@ -10,6 +10,7 @@ import ForgotPassword from '../features/auth/pages/forgot';
 import Dashboard from '../features/Dashboard/pages/Dashboard';
 import Splash from "../features/auth/pages/splash";
 import Customer from "../features/customer/pages/Customer";
+
 import Help from "../features/help/pages/help";
 
 // Vendor Components (separate pages)
@@ -32,6 +33,14 @@ import CreateAuditor from "../features/Auditor/pages/CreateAuditor";
 // import LocationManagement from "../features/master/pages/LocationManagement";
 // import Categories from "../features/master/pages/Categories";
 // import Items from "../features/master/pages/Items";
+
+// import Vendor from "../features/Vendor/pages/Vendor";
+// import Technician from "../features/Technician/pages/Technician";
+// import Auditor from "../features/Auditor/pages/Auditor";
+// import Subadmin from "../features/Subadmin/pages/Subadmin";
+// import Help from "../features/help/pages/help";
+
+
 
 // Settings Components
 // import Profile from "../features/settings/pages/Profile";

@@ -211,7 +211,7 @@ export default function Splash() {
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full 
                             bg-purple-500/10 border border-purple-400/30
                             text-purple-300 text-xs tracking-[0.3em] uppercase">
-              bookmac.com
+              bookamc.com
             </div>
           </div>
 
@@ -238,7 +238,7 @@ export default function Splash() {
             <div className="flex justify-between items-center border-b border-white/10 pb-3">
               <span className="text-white/50 text-sm">Email ID</span>
               <span className="text-white/90 font-medium">
-                demo@bookmac.com
+                demo@bookamc.com
               </span>
             </div>
 

@@ -7,6 +7,7 @@ import DashboardLayout from "../layout/DashboardLayout";
 
 import Login from '../features/auth/pages/Login';
 import ForgotPassword from '../features/auth/pages/forgot';
+import Register from '../features/auth/pages/register'; 
 import Dashboard from '../features/dashboard/pages/Dashboard';
 import Splash from "../features/auth/pages/splash";
 import Customer from "../features/customer/pages/Customer";
@@ -15,8 +16,6 @@ import Technician from "../features/Technician/pages/Technician";
 import Auditor from "../features/Auditor/pages/Auditor";
 import Subadmin from "../features/Subadmin/pages/Subadmin";
 import Help from "../features/help/pages/help";
-
-
 
 /**
  * 🔐 Auth Guard
@@ -48,7 +47,8 @@ export default function AppRoutes() {
 
         {/* AUTH */}
         <Route path="/login" element={<Login />} />
-         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/register" element={<Register />} /> {/* Fixed: Capital R */}
       </Route>
 
       {/* ========== PROTECTED ROUTES ========== */}
@@ -65,14 +65,6 @@ export default function AppRoutes() {
           <Route path="/auditor" element={<Auditor />} />
           <Route path="/subadmin" element={<Subadmin />} />
           <Route path="/help" element={<Help />} />
-
-          {/* MASTER */}
-          {/* <Route
-            path="/master/location-management"
-            element={<LocationManagement />}
-          />
-          <Route path="/master/category" element={<Categories />} />
-          <Route path="/master/item" element={<Items />} /> */}
 
         </Route>
       </Route>

@@ -1,88 +1,3 @@
-// import React from 'react';
-// import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-
-// import AuthLayout from '../layout/AuthLayout';
-// import DashboardLayout from '../layout/DashboardLayout';
-
-// import Login from '../features/auth/pages/Login';
-// import ForgotPassword from '../features/auth/pages/forgot';
-// import Dashboard from '../features/dashboard/pages/Dashboard';
-// import Splash from '../features/auth/pages/splash';
-
-// // Orders
-// import Orders from '../features/oders/pages/Orders';
-
-// // Users (separate, NOT in master)
-// import Users from '../features/users/pages/users';
-
-// // Master Management
-// import Tables from '../features/master/pages/Tables';
-// import Categories from '../features/master/pages/Categories';
-// import Items from '../features/master/pages/Items';
-// import Taxes from '../features/master/pages/Taxes';
-
-// // Reports
-// import ProfitLoss from '../features/reports/pages/ProfitLoss';
-
-// /**
-//  * 🔐 Auth Guard
-//  */
-// function RequireAuth() {
-//   const isAuthenticated = useSelector(
-//     (state) => state.auth.isAuthenticated
-//   );
-
-//   if (!isAuthenticated) {
-//     return <Navigate to="/login" replace />;
-//   }
-
-//   return <Outlet />;
-// }
-
-// /**
-//  * ✅ ALL ROUTES
-//  */
-// export default function AppRoutes() {
-//   return (
-//     <Routes>
-
-//       {/* ================= PUBLIC ROUTES ================= */}
-//       <Route element={<AuthLayout />}>
-//          <Route path="/splash" element={<Splash />} />
-
-//         <Route path="/login" element={<Login />} />
-//          <Route path="/forgot-password" element={<ForgotPassword />} />
-//       </Route>
-
-//       {/* ================= PROTECTED ROUTES ================= */}
-//       <Route element={<RequireAuth />}>
-//         <Route element={<DashboardLayout />}>
-
-//           {/* MAIN */}
-//           <Route path="/dashboard" element={<Dashboard />} />
-//           <Route path="/orders" element={<Orders />} />
-//           <Route path="/users" element={<Users />} />
-
-//           {/* MASTER MANAGEMENT */}
-//           <Route path="/master/tables" element={<Tables />} />
-//           <Route path="/master/categories" element={<Categories />} />
-//           <Route path="/master/items" element={<Items />} />
-//           <Route path="/master/taxes" element={<Taxes />} />
-
-//           {/* REPORTS */}
-//           <Route path="/reports/profit-loss" element={<ProfitLoss />} />
-
-//         </Route>
-//       </Route>
-
-//       {/* ================= FALLBACK ================= */}
-//       <Route path="*" element={<Navigate to="/login" replace />} />
-
-//     </Routes>
-//   );
-// }
-
 import React from "react";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -92,20 +7,35 @@ import DashboardLayout from "../layout/DashboardLayout";
 
 import Login from '../features/auth/pages/Login';
 import ForgotPassword from '../features/auth/pages/forgot';
-import Dashboard from '../features/dashboard/pages/Dashboard';
+import Dashboard from '../features/Dashboard/pages/Dashboard';
 import Splash from "../features/auth/pages/splash";
+import Customer from "../features/customer/pages/Customer";
+import Help from "../features/help/pages/help";
 
-// Orders
-// import Orders from '../features/oders/pages/Orders';
+// Vendor Components (separate pages)
+import CreateVendor from "../features/Vendor/pages/CreateVendor";
+import VendorList from "../features/Vendor/pages/VendorList";
 
-// Users (separate, NOT in master)
-// import Users from '../features/users/pages/users';
+// Subadmin Components (separate pages)
+import SubadminForm from "../features/Subadmin/pages/CreateSubmin";
+import SubadminList from "../features/Subadmin/pages/SubadminTable";
 
-// Master Management
+// Technician Components (separate pages)
+import TechnicianList from "../features/Technician/pages/TechnicianList";
+import TechnicianForm from "../features/Technician/pages/TechnicianForm";
 
+// Auditor Components (separate pages)
+import AuditorTable from "../features/Auditor/pages/AuditorTable";
+import CreateAuditor from "../features/Auditor/pages/CreateAuditor";
 
-// Reports
+// Master Components
+// import LocationManagement from "../features/master/pages/LocationManagement";
+// import Categories from "../features/master/pages/Categories";
+// import Items from "../features/master/pages/Items";
 
+// Settings Components
+// import Profile from "../features/settings/pages/Profile";
+// import Account from "../features/settings/pages/Account";
 
 /**
  * 🔐 Auth Guard
@@ -123,7 +53,7 @@ function RequireAuth() {
 }
 
 /**
- * ✅ ROUTES (MATCHES SIDEBAR)
+ * ✅ ROUTES (MATCHES UPDATED SIDEBAR)
  */
 export default function AppRoutes() {
   return (
@@ -137,7 +67,7 @@ export default function AppRoutes() {
 
         {/* AUTH */}
         <Route path="/login" element={<Login />} />
-         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Route>
 
       {/* ========== PROTECTED ROUTES ========== */}
@@ -149,19 +79,48 @@ export default function AppRoutes() {
 
           {/* SIDEBAR PAGES */}
           <Route path="/customer" element={<Customer />} />
-          <Route path="/vendor" element={<Vendor />} />
-          <Route path="/technician" element={<Technician />} />
-          <Route path="/auditor" element={<Auditor />} />
-          <Route path="/subadmin" element={<Subadmin />} />
           <Route path="/help" element={<Help />} />
 
-          {/* MASTER */}
-          {/* <Route
-            path="/master/location-management"
-            element={<LocationManagement />}
-          />
+          {/* VENDOR SECTION */}
+          <Route path="/vendor/list" element={<VendorList />} />
+          <Route path="/vendor/create" element={<CreateVendor />} />
+          {/* <Route path="/vendor/edit/:id" element={<CreateVendor />} /> */}
+          
+          {/* Optional: Redirect /vendor to /vendor/list */}
+          <Route path="/vendor" element={<Navigate to="/vendor/list" replace />} />
+
+          {/* SUBADMIN SECTION */}
+          <Route path="/subadmin/list" element={<SubadminList />} />
+          <Route path="/subadmin/create" element={<SubadminForm />} />
+          {/* <Route path="/subadmin/edit/:id" element={<SubadminForm />} /> */}
+          
+          {/* Optional: Redirect /subadmin to /subadmin/list */}
+          <Route path="/subadmin" element={<Navigate to="/subadmin/list" replace />} />
+
+          {/* TECHNICIAN SECTION */}
+          <Route path="/technician/list" element={<TechnicianList />} />
+          <Route path="/technician/create" element={<TechnicianForm />} />
+          {/* <Route path="/technician/edit/:id" element={<CreateTechnician />} /> */}
+          
+          {/* Optional: Redirect /technician to /technician/list */}
+          <Route path="/technician" element={<Navigate to="/technician/list" replace />} />
+
+          {/* AUDITOR SECTION */}
+          <Route path="/auditor/list" element={<AuditorTable />} />
+          <Route path="/auditor/create" element={<CreateAuditor />} />
+          {/* <Route path="/auditor/edit/:id" element={<CreateAuditor />} /> */}
+          
+          {/* Optional: Redirect /auditor to /auditor/list */}
+          <Route path="/auditor" element={<Navigate to="/auditor/list" replace />} />
+
+          {/* MASTER SECTION */}
+          {/* <Route path="/master/location-management" element={<LocationManagement />} />
           <Route path="/master/category" element={<Categories />} />
           <Route path="/master/item" element={<Items />} /> */}
+
+          {/* SETTINGS SECTION */}
+          {/* <Route path="/settings/profile" element={<Profile />} />
+          <Route path="/settings/account" element={<Account />} /> */}
 
         </Route>
       </Route>

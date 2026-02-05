@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function AddCustomerForm() {
+export default function CustomerForm({ onSubmit }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -10,123 +10,115 @@ export default function AddCustomerForm() {
     password: "",
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", form);
-    // Add form submission logic here
+  const handleSubmit = () => {
+    if (!form.name || !form.phone) return;
+    onSubmit(form);
+    setForm({ name: "", email: "", phone: "", type: "", username: "", password: "" });
   };
 
   return (
-    <div className="p-6">
-      <h2 className="text-lg font-semibold text-purple-600 mb-6">
-        Add Customer
-      </h2>
-
-      <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Name */}
-          <div>
-            <label className="text-sm text-gray-600">Name</label>
-            <input
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              className="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-purple-400 outline-none"
-              placeholder="Enter full name"
-              required
-            />
-          </div>
-
-          {/* Email */}
-          <div>
-            <label className="text-sm text-gray-600">Email address</label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              className="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-purple-400 outline-none"
-              placeholder="Enter email"
-              required
-            />
-          </div>
-
-          {/* Phone */}
-          <div>
-            <label className="text-sm text-gray-600">Contact No</label>
-            <input
-              name="phone"
-              value={form.phone}
-              onChange={handleChange}
-              className="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-purple-400 outline-none"
-              placeholder="Contact number"
-              required
-            />
-          </div>
-
-          {/* Customer Type */}
-          <div>
-            <label className="text-sm text-gray-600">Customer Type</label>
-            <select
-              name="type"
-              value={form.type}
-              onChange={handleChange}
-              className="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-purple-400 outline-none"
-              required
-            >
-              <option value="">Select Type</option>
-              <option value="Regular">Regular</option>
-              <option value="VIP">VIP</option>
-              <option value="Corporate">Corporate</option>
-            </select>
-          </div>
-
-          {/* Username */}
-          <div>
-            <label className="text-sm text-gray-600">Username</label>
-            <input
-              name="username"
-              value={form.username}
-              onChange={handleChange}
-              className="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-purple-400 outline-none"
-              placeholder="Choose a username"
-              required
-            />
-          </div>
-
-          {/* Password */}
-          <div>
-            <label className="text-sm text-gray-600">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              className="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-purple-400 outline-none"
-              placeholder="Create a password"
-              required
-            />
-          </div>
+    <div className="space-y-6">
+      {/* First Row */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Name
+          </label>
+          <input
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            placeholder="Enter full name"
+            className="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
         </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Email address
+          </label>
+          <input
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="enter email"
+            className="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+      </div>
 
-        {/* Submit */}
-        <div className="mt-6 text-right">
-          <button
-            type="submit"
-            className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg shadow transition-colors"
+      {/* Second Row */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Contact No
+          </label>
+          <input
+            name="phone"
+            value={form.phone}
+            onChange={handleChange}
+            placeholder="Contact number"
+            className="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Customer Type
+          </label>
+          <select
+            name="type"
+            value={form.type}
+            onChange={handleChange}
+            className="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
-            Submit
-          </button>
+            <option value="">Select Type</option>
+            <option value="Regular">Regular</option>
+            <option value="VIV">VIV</option>
+            <option value="Premium">Premium</option>
+          </select>
         </div>
-      </form>
+      </div>
+
+      {/* Third Row */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Username
+          </label>
+          <input
+            name="username"
+            value={form.username}
+            onChange={handleChange}
+            placeholder="Choose a username"
+            className="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+            placeholder="Create a password"
+            className="w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+      </div>
+
+      {/* Submit Button */}
+      <div className="flex justify-end pt-4">
+        <button
+          onClick={handleSubmit}
+          className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2.5 rounded-lg font-medium"
+        >
+          Submit
+        </button>
+      </div>
     </div>
   );
 }

@@ -4,71 +4,153 @@ import { ChevronDown } from "lucide-react";
 
 export default function Sidebar() {
   const [openSections, setOpenSections] = useState({
+    vendor: false,
+    technician: false,
+    auditor: false,
+    subadmin: false,
     master: false,
-    settings: false
+    settings: false,
   });
 
   const toggleSection = (section) => {
-    setOpenSections(prev => ({
+    setOpenSections((prev) => ({
       ...prev,
-      [section]: !prev[section]
+      [section]: !prev[section],
     }));
   };
 
+  const sectionBtn =
+    "w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all hover:bg-gray-50 dark:hover:bg-gray-700";
+
   return (
-    <aside className="w-64 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 h-full border-r border-gray-200 dark:border-gray-700 transition-colors duration-200">
+    <aside className="w-64 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 h-full border-r border-gray-200 dark:border-gray-700">
       {/* Logo */}
       <div className="p-6 text-lg font-semibold border-b border-gray-200 dark:border-gray-700">
-        <span className="text-purple-600 dark:text-purple-400 font-bold text-xl">Dashboard</span>
+        <span className="text-purple-600 dark:text-purple-400 font-bold text-xl">
+          Dashboard
+        </span>
       </div>
 
-      <nav className="p-4 space-y-0.5">
+      <nav className="p-4 space-y-1">
         {/* Dashboard */}
-        <SidebarItem 
-          to="/dashboard" 
-          label="Dashboard"
-          active={true}
-        />
+        <SidebarItem to="/dashboard" label="Dashboard" />
 
         {/* Customer */}
-        <SidebarItem 
-          to="/customer" 
-          label="Customer"
-        />
+        <SidebarItem to="/customer" label="Customer" />
 
-        {/* Vendor */}
-        <SidebarItem 
-          to="/vendor" 
-          label="Vendor"
-        />
+        {/* ================= VENDOR ================= */}
+        <div>
+          <button
+            onClick={() => toggleSection("vendor")}
+            className={sectionBtn}
+          >
+            <span className="font-medium">Vendor</span>
+            <ChevronDown
+              size={16}
+              className={`transition-transform ${
+                openSections.vendor ? "rotate-180" : ""
+              }`}
+            />
+          </button>
 
-        {/* Technician */}
-        <SidebarItem 
-          to="/technician" 
-          label="Technician"
-        />
+          {openSections.vendor && (
+            <div className="ml-4 border-l border-gray-200 dark:border-gray-600 pl-3">
+              <SidebarItem to="/vendor/create" label="Create Vendor" indent />
+              <SidebarItem to="/vendor/list" label="Vendor List" indent />
+            </div>
+          )}
+        </div>
 
-        {/* Auditor */}
-        <SidebarItem 
-          to="/auditor" 
-          label="Auditor"
-        />
+        {/* ================= TECHNICIAN ================= */}
+        <div>
+          <button
+            onClick={() => toggleSection("technician")}
+            className={sectionBtn}
+          >
+            <span className="font-medium">Technician</span>
+            <ChevronDown
+              size={16}
+              className={`transition-transform ${
+                openSections.technician ? "rotate-180" : ""
+              }`}
+            />
+          </button>
 
-        {/* Subadmin */}
-        <SidebarItem 
-          to="/subadmin" 
-          label="Subadmin"
-        />
+          {openSections.technician && (
+            <div className="ml-4 border-l border-gray-200 dark:border-gray-600 pl-3">
+              <SidebarItem
+                to="/technician/create"
+                label="Create Technician"
+                indent
+              />
+              <SidebarItem
+                to="/technician/list"
+                label="Technician List"
+                indent
+              />
+            </div>
+          )}
+        </div>
+
+        {/* ================= AUDITOR ================= */}
+        <div>
+          <button
+            onClick={() => toggleSection("auditor")}
+            className={sectionBtn}
+          >
+            <span className="font-medium">Auditor</span>
+            <ChevronDown
+              size={16}
+              className={`transition-transform ${
+                openSections.auditor ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {openSections.auditor && (
+            <div className="ml-4 border-l border-gray-200 dark:border-gray-600 pl-3">
+              <SidebarItem
+                to="/auditor/create"
+                label="Create Auditor"
+                indent
+              />
+              <SidebarItem
+                to="/auditor/list"
+                label="Auditor List"
+                indent
+              />
+            </div>
+          )}
+        </div>
+
+        {/* ================= SUBADMIN ================= */}
+        <div>
+          <button
+            onClick={() => toggleSection("subadmin")}
+            className={sectionBtn}
+          >
+            <span className="font-medium">Subadmin</span>
+            <ChevronDown
+              size={16}
+              className={`transition-transform ${
+                openSections.subadmin ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {openSections.subadmin && (
+            <div className="ml-4 border-l border-gray-200 dark:border-gray-600 pl-3">
+              <SidebarItem to="/subadmin/create" label="Create Subadmin" indent />
+              <SidebarItem to="/subadmin/list" label="Subadmin List" indent />
+            </div>
+          )}
+        </div>
 
         {/* ================= MASTER ================= */}
         <div>
           <button
             onClick={() => toggleSection("master")}
-            className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all ${
-              openSections.master 
-                ? "bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-300" 
-                : "hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
-            }`}
+            className={sectionBtn}
           >
             <span className="font-medium">Master</span>
             <ChevronDown
@@ -80,35 +162,43 @@ export default function Sidebar() {
           </button>
 
           {openSections.master && (
-            <div className="ml-4 border-l border-gray-200 dark:border-gray-600 pl-3 space-y-0.5 mt-0.5">
-              <SidebarItem 
-                to="/master/location-management" 
+            <div className="ml-4 border-l border-gray-200 dark:border-gray-600 pl-3">
+              <SidebarItem
+                to="/master/location-management"
                 label="Location Management"
-                indent={true}
+                indent
               />
-              <SidebarItem 
-                to="/master/category" 
-                label="Category"
-                indent={true}
-              />
-              <SidebarItem 
-                to="/master/item" 
-                label="Item"
-                indent={true}
-              />
+              <SidebarItem to="/master/category" label="Category" indent />
+              <SidebarItem to="/master/item" label="Item" indent />
             </div>
           )}
         </div>
 
         {/* ================= SETTINGS ================= */}
-        
+        <div>
+          <button
+            onClick={() => toggleSection("settings")}
+            className={sectionBtn}
+          >
+            <span className="font-medium">Settings</span>
+            <ChevronDown
+              size={16}
+              className={`transition-transform ${
+                openSections.settings ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {openSections.settings && (
+            <div className="ml-4 border-l border-gray-200 dark:border-gray-600 pl-3">
+              <SidebarItem to="/settings/profile" label="Profile" indent />
+              <SidebarItem to="/settings/account" label="Account" indent />
+            </div>
+          )}
+        </div>
 
         {/* Help */}
-        <SidebarItem 
-          to="/help" 
-          label="Help"
-        />
-
+        <SidebarItem to="/help" label="Help" />
       </nav>
     </aside>
   );

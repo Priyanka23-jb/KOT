@@ -9,7 +9,7 @@ import Login from '../features/auth/pages/Login';
 import ForgotPassword from '../features/auth/pages/forgot';
 import Dashboard from '../features/Dashboard/pages/Dashboard';
 import Splash from "../features/auth/pages/splash";
-import Customer from "../features/customer/pages/Customer";
+
 
 import Help from "../features/help/pages/help";
 
@@ -28,7 +28,10 @@ import TechnicianForm from "../features/Technician/pages/TechnicianForm";
 // Auditor Components (separate pages)
 import AuditorTable from "../features/Auditor/pages/AuditorTable";
 import CreateAuditor from "../features/Auditor/pages/CreateAuditor";
-
+import SolarRegistration from "../features/customer/pages/CustomerSolar/solarRegistration";
+import CctvRegistration from "../features/customer/pages/CustomerCCTV/cctvRegistration";
+import WaterRegistration from "../features/customer/pages/Customerwater/waterRegistration";
+import FireRegistration from "../features/customer/pages/CustomerFire/FireRegistration";
 // Master Components
 // import LocationManagement from "../features/master/pages/LocationManagement";
 // import Categories from "../features/master/pages/Categories";
@@ -87,14 +90,23 @@ export default function AppRoutes() {
           <Route path="/dashboard" element={<Dashboard />} />
 
           {/* SIDEBAR PAGES */}
-          <Route path="/customer" element={<Customer />} />
+          <Route path="/customer/solar-registration" element={<SolarRegistration />}/>
+          <Route path="/customer/cctv-registration" element={<CctvRegistration />}/>
+          <Route
+            path="/customer/water-registration"
+            element={<WaterRegistration />}
+          />
+          <Route
+            path="/customer/fire-registration"
+            element={<FireRegistration />}
+          />
           <Route path="/help" element={<Help />} />
 
           {/* VENDOR SECTION */}
           <Route path="/vendor/list" element={<VendorList />} />
           <Route path="/vendor/create" element={<CreateVendor />} />
           {/* <Route path="/vendor/edit/:id" element={<CreateVendor />} /> */}
-          
+
           {/* Optional: Redirect /vendor to /vendor/list */}
           <Route path="/vendor" element={<Navigate to="/vendor/list" replace />} />
 
@@ -102,7 +114,7 @@ export default function AppRoutes() {
           <Route path="/subadmin/list" element={<SubadminList />} />
           <Route path="/subadmin/create" element={<SubadminForm />} />
           {/* <Route path="/subadmin/edit/:id" element={<SubadminForm />} /> */}
-          
+
           {/* Optional: Redirect /subadmin to /subadmin/list */}
           <Route path="/subadmin" element={<Navigate to="/subadmin/list" replace />} />
 
@@ -110,7 +122,7 @@ export default function AppRoutes() {
           <Route path="/technician/list" element={<TechnicianList />} />
           <Route path="/technician/create" element={<TechnicianForm />} />
           {/* <Route path="/technician/edit/:id" element={<CreateTechnician />} /> */}
-          
+
           {/* Optional: Redirect /technician to /technician/list */}
           <Route path="/technician" element={<Navigate to="/technician/list" replace />} />
 
@@ -118,7 +130,7 @@ export default function AppRoutes() {
           <Route path="/auditor/list" element={<AuditorTable />} />
           <Route path="/auditor/create" element={<CreateAuditor />} />
           {/* <Route path="/auditor/edit/:id" element={<CreateAuditor />} /> */}
-          
+
           {/* Optional: Redirect /auditor to /auditor/list */}
           <Route path="/auditor" element={<Navigate to="/auditor/list" replace />} />
 

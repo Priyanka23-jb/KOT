@@ -1,12 +1,11 @@
+import React from "react";
+import RegisterForm from "../components/registerform";
 
-import React from 'react';
-import ForgotForm from '../components/forgotform';
-
-export default function ForgotPassword() {
+export default function Register() {
   return (
     <div className="relative min-h-screen overflow-hidden">
 
-      {/* BACKGROUND IMAGE */}
+      {/* BACKGROUND IMAGE — SAME AS LOGIN */}
       <div
         className="absolute inset-0 bg-cover bg-center scale-105 animate-slowZoom"
         style={{
@@ -15,22 +14,16 @@ export default function ForgotPassword() {
         }}
       />
 
-      {/* TECH GRID OVERLAY */}
+      {/* GRID OVERLAY */}
       <div className="absolute inset-0 bg-grid opacity-30 animate-gridMove" />
 
-      {/* DARK BLUE OVERLAY */}
+      {/* DARK OVERLAY */}
       <div className="absolute inset-0 bg-blue-900/60" />
 
-      {/* CENTER CONTENT */}
+      {/* CENTERED CONTENT */}
       <div className="relative z-10 min-h-screen flex items-center justify-center px-4">
-        <div
-          className="w-[420px] max-w-[95%]
-                     bg-white/90 backdrop-blur-xl
-                     rounded-xl shadow-2xl
-                     p-6 text-gray-900"
-        >
-          {/* FORGOT FORM */}
-          <ForgotForm />
+        <div className="w-full max-w-md bg-white p-6 rounded-xl shadow-2xl">
+          <RegisterForm />
         </div>
       </div>
 
@@ -59,7 +52,6 @@ export default function ForgotPassword() {
           animation: gridMove 40s linear infinite;
         }
       `}</style>
-
     </div>
   );
 }

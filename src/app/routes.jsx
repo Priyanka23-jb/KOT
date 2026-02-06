@@ -7,11 +7,18 @@ import DashboardLayout from "../layout/DashboardLayout";
 
 import Login from '../features/auth/pages/Login';
 import ForgotPassword from '../features/auth/pages/forgot';
-import Dashboard from '../features/Dashboard/pages/Dashboard';
+
+import Register from '../features/auth/pages/register'; 
+import Dashboard from '../features/dashboard/pages/Dashboard';
+
+// import Dashboard from '../features/Dashboard/pages/Dashboard';
+
 import Splash from "../features/auth/pages/splash";
 
 
 import Help from "../features/help/pages/help";
+
+
 
 // Vendor Components (separate pages)
 import CreateVendor from "../features/Vendor/pages/CreateVendor";
@@ -49,6 +56,7 @@ import FireRegistration from "../features/customer/pages/CustomerFire/FireRegist
 // import Profile from "../features/settings/pages/Profile";
 // import Account from "../features/settings/pages/Account";
 
+
 /**
  * 🔐 Auth Guard
  */
@@ -80,6 +88,9 @@ export default function AppRoutes() {
         {/* AUTH */}
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+
+        <Route path="/register" element={<Register />} /> {/* Fixed: Capital R */}
+
       </Route>
 
       {/* ========== PROTECTED ROUTES ========== */}
@@ -101,6 +112,8 @@ export default function AppRoutes() {
             element={<FireRegistration />}
           />
           <Route path="/help" element={<Help />} />
+
+
 
           {/* VENDOR SECTION */}
           <Route path="/vendor/list" element={<VendorList />} />
@@ -142,6 +155,7 @@ export default function AppRoutes() {
           {/* SETTINGS SECTION */}
           {/* <Route path="/settings/profile" element={<Profile />} />
           <Route path="/settings/account" element={<Account />} /> */}
+
 
         </Route>
       </Route>

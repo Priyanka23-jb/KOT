@@ -56,12 +56,12 @@ export default function Sidebar() {
                 label="Customer Registration"
                 indent
               />
-              {/* <SidebarItem
-                to="/customer/cctv-registration"
-                label="CCTV Registration"
+               <SidebarItem
+                to="/customer/solar-list"
+                label="Customer List "
                 indent
               />
-              <SidebarItem
+              {/* <SidebarItem
                 to="/customer/water-registration"
                 label="Water Registration"
                 indent
@@ -70,7 +70,7 @@ export default function Sidebar() {
                 to="/customer/fire-registration"
                 label="Fire Registration"
                 indent
-              /> */}
+              />  */}
             </div>
           )}
         </div>

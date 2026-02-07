@@ -36,7 +36,7 @@ import TechnicianForm from "../features/Technician/pages/TechnicianForm";
 import AuditorTable from "../features/Auditor/pages/AuditorTable";
 import CreateAuditor from "../features/Auditor/pages/CreateAuditor";
 import SolarRegistration from "../features/customer/pages/CustomerSolar/solarRegistration";
-import CctvRegistration from "../features/customer/pages/CustomerCCTV/cctvRegistration";
+import Table from "../features/customer/pages/CustomerSolar/Table";
 import WaterRegistration from "../features/customer/pages/Customerwater/waterRegistration";
 import FireRegistration from "../features/customer/pages/CustomerFire/FireRegistration";
 // Master Components
@@ -102,7 +102,7 @@ export default function AppRoutes() {
 
           {/* SIDEBAR PAGES */}
           <Route path="/customer/solar-registration" element={<SolarRegistration />}/>
-          <Route path="/customer/cctv-registration" element={<CctvRegistration />}/>
+          <Route path="/customer/solar-list" element={<Table />}/>
           <Route
             path="/customer/water-registration"
             element={<WaterRegistration />}

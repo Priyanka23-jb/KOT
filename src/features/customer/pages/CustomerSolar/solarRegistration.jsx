@@ -1800,7 +1800,7 @@ export default function CreateSolarCustomer() {
                     <FileCheck className="w-5 h-5 text-purple-500" />
                     Declaration & Consent
                 </h4>
-                <div className="flex items-start gap-3 p-4 bg-gradient-to-r from-purple-50 to-yellow-50 dark:from-gray-900 dark:to-gray-800 rounded-lg">
+                <div className="flex items-start gap-3 p-4 bg-gradient-to-r from-purple-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 rounded-lg">
                     <input
                         type="checkbox"
                         name="declaration"
@@ -1825,7 +1825,7 @@ export default function CreateSolarCustomer() {
             <div className="mb-8">
                 <h1 className="text-2xl font-bold flex items-center gap-2 text-gray-800 dark:text-white">
                     <Sun className="text-purple-500" />
-                    Multi-Industry Customer Onboarding
+                     Customer Registration
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
                     BOOKAMC – Multi-Industry Systems Management
@@ -1839,7 +1839,7 @@ export default function CreateSolarCustomer() {
                                 <div
                                     className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold
                                         ${step >= index + 1
-                                            ? "bg-gradient-to-r from-purple-500 to-yellow-500 text-white"
+                                            ? "bg-gradient-to-r from-purple-500 to-purple-500 text-white"
                                             : "bg-gray-200 dark:bg-gray-700 text-gray-500"
                                         }`}
                                 >
@@ -1853,7 +1853,7 @@ export default function CreateSolarCustomer() {
                     </div>
                     <div className="h-1 bg-gray-200 dark:bg-gray-700 rounded">
                         <div
-                            className="h-full bg-gradient-to-r from-purple-500 to-yellow-500 rounded transition-all"
+                            className="h-full bg-gradient-to-r from-purple-500 to-purple-500 rounded transition-all"
                             style={{ width: `${((step - 1) / (totalSteps - 1)) * 100}%` }}
                         />
                     </div>
@@ -1879,7 +1879,7 @@ export default function CreateSolarCustomer() {
                     {step < totalSteps ? (
                         <button
                             onClick={() => setStep(step + 1)}
-                            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-yellow-500 text-white rounded hover:from-purple-600 hover:to-yellow-600 transition"
+                            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-500 text-white rounded hover:from-purple-600 hover:to-purple-600 transition"
                         >
                             Next <ChevronRight size={18} />
                         </button>

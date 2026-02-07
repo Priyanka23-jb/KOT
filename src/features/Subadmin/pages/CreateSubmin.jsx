@@ -11,17 +11,17 @@ export default function SubadminForm() {
     contactNo: '',
     username: '',
     password: '',
-    
+
     // Location
     country: '',
     state: '',
     city: '',
-    
+
     // Professional
     department: '',
     designation: '',
     assignedWorkfield: '',
-    
+
     // Image
     profileImage: null,
   });
@@ -38,12 +38,41 @@ export default function SubadminForm() {
   ];
 
   const designations = [
-    'Manager',
-    'Supervisor',
-    'Team Lead',
-    'Executive',
-    'Assistant Manager',
-    'Senior Executive',
+    'Chief Executive Officer',
+    'Chief Operating Officer',
+    'Chief  Technical Officer',
+    'Chief Marketing Officer',
+    'Director Corporate',
+    'Director Sales & Marketing',
+    'Director Finance',
+    'Director Compliance',
+];
+  const indianStates = [
+    "Andhra Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Delhi",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal",
+    "Jammu and Kashmir",
+    "Puducherry"
   ];
 
   const handleInputChange = (e) => {
@@ -67,25 +96,33 @@ export default function SubadminForm() {
     // Handle form submission logic here
     navigate('/subadmin/list');
   };
+  const handleStateChange = (e) => {
+    const selectedState = e.target.value;
 
+    setFormData((prev) => ({
+      ...prev,
+      state: selectedState,
+      country: selectedState ? "India" : "",
+    }));
+  };
   return (
     <div className="full bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-6">
       <div className="max-full mx-auto">
         {/* Header */}
-       
+
 
         {/* Form Card */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
           <div className="p-8">
             <form onSubmit={handleSubmit} className="space-y-8">
-              
+
               {/* Section 1: Personal Information */}
               <div>
                 <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-6 pb-3 border-b border-gray-200 dark:border-gray-700 flex items-center gap-2">
                   <User className="w-5 h-5 text-purple-500" />
                   Personal Information
                 </h2>
-                
+
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   {/* Left Column */}
                   <div className="space-y-6">
@@ -225,52 +262,35 @@ export default function SubadminForm() {
                   <Globe className="w-5 h-5 text-purple-500" />
                   Location Information
                 </h2>
-                
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  {/* Country */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
-                      <Globe className="w-4 h-4" />
-                      Country
-                    </label>
-                    <select
-                      name="country"
-                      value={formData.country}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
-                      required
-                    >
-                      <option value="">Select Country</option>
-                      <option value="USA">United States</option>
-                      <option value="India">India</option>
-                      <option value="UK">United Kingdom</option>
-                      <option value="Canada">Canada</option>
-                      <option value="Australia">Australia</option>
-                    </select>
-                  </div>
 
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* State */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
                       <MapPin className="w-4 h-4" />
-                      State
+                      State *
                     </label>
-                    <input
-                      type="text"
+                    <select
                       name="state"
                       value={formData.state}
-                      onChange={handleInputChange}
-                      placeholder="Enter state"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                      onChange={handleStateChange}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                       required
-                    />
+                    >
+                      <option value="">Select State</option>
+                      {indianStates.map((state) => (
+                        <option key={state} value={state}>
+                          {state}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   {/* City */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
                       <Building className="w-4 h-4" />
-                      City
+                      City *
                     </label>
                     <input
                       type="text"
@@ -278,12 +298,13 @@ export default function SubadminForm() {
                       value={formData.city}
                       onChange={handleInputChange}
                       placeholder="Enter city"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                       required
                     />
                   </div>
                 </div>
               </div>
+
 
               {/* Section 3: Professional Information */}
               <div>
@@ -291,8 +312,8 @@ export default function SubadminForm() {
                   <Briefcase className="w-5 h-5 text-purple-500" />
                   Professional Information
                 </h2>
-                
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Department */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
@@ -333,22 +354,7 @@ export default function SubadminForm() {
                     </select>
                   </div>
 
-                  {/* Assigned Workfield */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
-                      <Briefcase className="w-4 h-4" />
-                      Assigned Workfield
-                    </label>
-                    <input
-                      type="text"
-                      name="assignedWorkfield"
-                      value={formData.assignedWorkfield}
-                      onChange={handleInputChange}
-                      placeholder="Enter assigned workfield"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
-                      required
-                    />
-                  </div>
+                 
                 </div>
               </div>
 

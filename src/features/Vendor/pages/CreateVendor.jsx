@@ -574,9 +574,6 @@ arising from Vendor's acts, omissions, or non-compliance.
                                         className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                                     />
                                 </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                         PF Registration No.
@@ -590,7 +587,6 @@ arising from Vendor's acts, omissions, or non-compliance.
                                         className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                                     />
                                 </div>
-
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                         ESI Registration No.
@@ -604,7 +600,6 @@ arising from Vendor's acts, omissions, or non-compliance.
                                         className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                                     />
                                 </div>
-
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                         Labour License No.
@@ -618,9 +613,6 @@ arising from Vendor's acts, omissions, or non-compliance.
                                         className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                                     />
                                 </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                         Fire / Electrical / Environmental License No.
@@ -634,7 +626,6 @@ arising from Vendor's acts, omissions, or non-compliance.
                                         className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                                     />
                                 </div>
-
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                         ISO Certification for Occupational Health & Safety
@@ -650,50 +641,22 @@ arising from Vendor's acts, omissions, or non-compliance.
                                         <option value="No">No</option>
                                     </select>
                                 </div>
-                            </div>
-
-                            {formData.isoCertified === 'Yes' && (
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                        Number of Valid ISO Certifications
-                                    </label>
-                                    <input
-                                        type="number"
-                                        name="isoCount"
-                                        value={formData.isoCount}
-                                        onChange={handleInputChange}
-                                        placeholder="Enter number"
-                                        min="1"
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                                    />
-                                </div>
-                            )}
-
-                            <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
-                                <div className="flex items-start gap-3">
-                                    <AlertCircle className="w-5 h-5 text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
+                                {formData.isoCertified === 'Yes' && (
                                     <div>
-                                        <h3 className="font-medium text-yellow-800 dark:text-yellow-300 mb-2">
-                                            Safety Declaration
-                                        </h3>
-                                        <div className="text-sm text-yellow-700 dark:text-yellow-400 whitespace-pre-line max-h-60 overflow-y-auto mb-4">
-                                            {safetyDeclaration}
-                                        </div>
-                                        <label className="flex items-center gap-2">
-                                            <input
-                                                type="checkbox"
-                                                name="safetyDeclarationAccepted"
-                                                checked={formData.safetyDeclarationAccepted}
-                                                onChange={handleInputChange}
-                                                className="rounded border-gray-300 text-purple-600 focus:ring-purple-500"
-                                                required
-                                            />
-                                            <span className="text-sm text-yellow-800 dark:text-yellow-300">
-                                                I accept and agree to the above safety declaration *
-                                            </span>
+                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                            Number of Valid ISO Certifications
                                         </label>
+                                        <input
+                                            type="number"
+                                            name="isoCount"
+                                            value={formData.isoCount}
+                                            onChange={handleInputChange}
+                                            placeholder="Enter number"
+                                            min="1"
+                                            className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                        />
                                     </div>
-                                </div>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -964,7 +927,7 @@ arising from Vendor's acts, omissions, or non-compliance.
                         <div className="space-y-6">
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
                                         Number of Technicians *
                                     </label>
                                     <input
@@ -998,10 +961,10 @@ arising from Vendor's acts, omissions, or non-compliance.
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                                <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-3">
                                     Certification Details Available (Select all that apply)
                                 </label>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                     {certificationTypes.map(cert => (
                                         <label key={cert} className="flex items-center gap-3 p-3 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
                                             <input
@@ -1017,10 +980,10 @@ arising from Vendor's acts, omissions, or non-compliance.
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                                <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-3">
                                     Tools & Equipment Available (Checklist)
                                 </label>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                     {toolsList.map(tool => (
                                         <label key={tool} className="flex items-center gap-3 p-3 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
                                             <input
@@ -1653,6 +1616,32 @@ arising from Vendor's acts, omissions, or non-compliance.
                                             <li>• Please keep all original documents ready for verification</li>
                                             <li>• Our compliance team may contact you for clarifications</li>
                                         </ul>
+                                        <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
+                                            <div className="flex items-start gap-3">
+                                                <AlertCircle className="w-5 h-5 text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-0.5" />
+                                                <div>
+                                                    <h3 className="font-medium text-yellow-800 dark:text-yellow-300 mb-2">
+                                                        Safety Declaration
+                                                    </h3>
+                                                    <div className="text-sm text-yellow-700 dark:text-yellow-400 whitespace-pre-line max-h-60 overflow-y-auto mb-4">
+                                                        {safetyDeclaration}
+                                                    </div>
+                                                    <label className="flex items-center gap-2">
+                                                        <input
+                                                            type="checkbox"
+                                                            name="safetyDeclarationAccepted"
+                                                            checked={formData.safetyDeclarationAccepted}
+                                                            onChange={handleInputChange}
+                                                            className="rounded border-gray-300 text-purple-600 focus:ring-purple-500"
+                                                            required
+                                                        />
+                                                        <span className="text-sm text-yellow-800 dark:text-yellow-300">
+                                                            I accept and agree to the above safety declaration *
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

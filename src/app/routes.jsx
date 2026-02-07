@@ -17,7 +17,6 @@ import Splash from "../features/auth/pages/splash";
 import InnerPage from "../features/auth/pages/innerpage";
 import Joinwithus from "../features/auth/pages/joinwithus"
 import Contact from "../features/auth/pages/contactus"
-import Customer from "../features/customer/pages/Customer";
 
 
 import Help from "../features/help/pages/help";
@@ -40,7 +39,10 @@ import TechnicianForm from "../features/Technician/pages/TechnicianForm";
 // Auditor Components (separate pages)
 import AuditorTable from "../features/Auditor/pages/AuditorTable";
 import CreateAuditor from "../features/Auditor/pages/CreateAuditor";
-
+import SolarRegistration from "../features/customer/pages/CustomerSolar/solarRegistration";
+import CctvRegistration from "../features/customer/pages/CustomerCCTV/cctvRegistration";
+import WaterRegistration from "../features/customer/pages/Customerwater/waterRegistration";
+import FireRegistration from "../features/customer/pages/CustomerFire/FireRegistration";
 // Master Components
 // import LocationManagement from "../features/master/pages/LocationManagement";
 // import Categories from "../features/master/pages/Categories";
@@ -96,7 +98,16 @@ export default function AppRoutes() {
           <Route path="/dashboard" element={<Dashboard />} />
 
           {/* SIDEBAR PAGES */}
-          <Route path="/customer" element={<Customer />} />
+          <Route path="/customer/solar-registration" element={<SolarRegistration />}/>
+          <Route path="/customer/cctv-registration" element={<CctvRegistration />}/>
+          <Route
+            path="/customer/water-registration"
+            element={<WaterRegistration />}
+          />
+          <Route
+            path="/customer/fire-registration"
+            element={<FireRegistration />}
+          />
           <Route path="/help" element={<Help />} />
 
           <Route path="/page" element={<Page />} />

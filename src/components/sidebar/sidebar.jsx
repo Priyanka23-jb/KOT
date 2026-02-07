@@ -36,8 +36,46 @@ export default function Sidebar() {
         {/* Dashboard */}
         <SidebarItem to="/dashboard" label="Dashboard" />
 
-        {/* Customer */}
-        <SidebarItem to="/customer" label="Customer" />
+        {/* ================= CUSTOMER ================= */}
+        <div>
+          <button
+            onClick={() => toggleSection("customer")}
+            className={sectionBtn}
+          >
+            <span className="font-medium">Customer</span>
+            <ChevronDown
+              size={16}
+              className={`transition-transform ${openSections.customer ? "rotate-180" : ""
+                }`}
+            />
+          </button>
+
+          {openSections.customer && (
+            <div className="ml-4 border-l border-gray-200 dark:border-gray-600 pl-3">
+              <SidebarItem
+                to="/customer/solar-registration"
+                label="Customer Registration"
+                indent
+              />
+              {/* <SidebarItem
+                to="/customer/cctv-registration"
+                label="CCTV Registration"
+                indent
+              />
+              <SidebarItem
+                to="/customer/water-registration"
+                label="Water Registration"
+                indent
+              />
+              <SidebarItem
+                to="/customer/fire-registration"
+                label="Fire Registration"
+                indent
+              /> */}
+            </div>
+          )}
+        </div>
+
 
         {/* ================= CONTAIN MANAGEMENT ================= */}
         <div>
@@ -72,9 +110,8 @@ export default function Sidebar() {
             <span className="font-medium">Vendor</span>
             <ChevronDown
               size={16}
-              className={`transition-transform ${
-                openSections.vendor ? "rotate-180" : ""
-              }`}
+              className={`transition-transform ${openSections.vendor ? "rotate-180" : ""
+                }`}
             />
           </button>
 
@@ -95,9 +132,8 @@ export default function Sidebar() {
             <span className="font-medium">Technician</span>
             <ChevronDown
               size={16}
-              className={`transition-transform ${
-                openSections.technician ? "rotate-180" : ""
-              }`}
+              className={`transition-transform ${openSections.technician ? "rotate-180" : ""
+                }`}
             />
           </button>
 
@@ -126,9 +162,8 @@ export default function Sidebar() {
             <span className="font-medium">Auditor</span>
             <ChevronDown
               size={16}
-              className={`transition-transform ${
-                openSections.auditor ? "rotate-180" : ""
-              }`}
+              className={`transition-transform ${openSections.auditor ? "rotate-180" : ""
+                }`}
             />
           </button>
 
@@ -149,9 +184,8 @@ export default function Sidebar() {
             <span className="font-medium">Subadmin</span>
             <ChevronDown
               size={16}
-              className={`transition-transform ${
-                openSections.subadmin ? "rotate-180" : ""
-              }`}
+              className={`transition-transform ${openSections.subadmin ? "rotate-180" : ""
+                }`}
             />
           </button>
 
@@ -176,9 +210,8 @@ export default function Sidebar() {
             <span className="font-medium">Master</span>
             <ChevronDown
               size={16}
-              className={`transition-transform ${
-                openSections.master ? "rotate-180" : ""
-              }`}
+              className={`transition-transform ${openSections.master ? "rotate-180" : ""
+                }`}
             />
           </button>
 
@@ -204,9 +237,8 @@ export default function Sidebar() {
             <span className="font-medium">Settings</span>
             <ChevronDown
               size={16}
-              className={`transition-transform ${
-                openSections.settings ? "rotate-180" : ""
-              }`}
+              className={`transition-transform ${openSections.settings ? "rotate-180" : ""
+                }`}
             />
           </button>
 

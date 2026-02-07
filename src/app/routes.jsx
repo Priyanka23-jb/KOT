@@ -31,13 +31,19 @@ import SubadminList from "../features/Subadmin/pages/SubadminTable";
 // Technician Components (separate pages)
 import TechnicianList from "../features/Technician/pages/TechnicianList";
 import TechnicianForm from "../features/Technician/pages/TechnicianForm";
+import LocationManagement from "../features/Master/pages/LocationManagement";
+import Category from "../features/Master/pages/Category";
+import Department from "../features/Master/pages/Department";
+import Designation from "../features/Master/pages/Designation";
+
 
 // Auditor Components (separate pages)
 import AuditorTable from "../features/Auditor/pages/AuditorTable";
 import CreateAuditor from "../features/Auditor/pages/CreateAuditor";
 
 // Master Components
-// import LocationManagement from "../features/master/pages/LocationManagement";
+// import LocationManagementForm from "../features/Master/pages/LocationManagementForm";
+// import LocationManagementList from "../features/Master/pages/LocationManagementList";
 // import Categories from "../features/master/pages/Categories";
 // import Items from "../features/master/pages/Items";
 
@@ -126,6 +132,13 @@ export default function AppRoutes() {
           
           {/* Optional: Redirect /technician to /technician/list */}
           <Route path="/technician" element={<Navigate to="/technician/list" replace />} />
+        
+          <Route path="/location" element={<LocationManagement />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/department" element={<Department />} />
+          <Route path="/designation" element={<Designation />} />
+ 
+          
 
           {/* AUDITOR SECTION */}
           <Route path="/auditor/list" element={<AuditorTable />} />

@@ -164,12 +164,24 @@ export default function Sidebar() {
           {openSections.master && (
             <div className="ml-4 border-l border-gray-200 dark:border-gray-600 pl-3">
               <SidebarItem
-                to="/master/location-management"
+                to="/location"
                 label="Location Management"
                 indent
               />
-              <SidebarItem to="/master/category" label="Category" indent />
-              <SidebarItem to="/master/item" label="Item" indent />
+              <SidebarItem 
+               to="/category"
+                label="Category"
+                 indent />
+              <SidebarItem
+               to="/department"
+                label="Department"
+                 indent 
+               />
+              <SidebarItem
+               to="/designation"
+                label="Designation"
+                 indent 
+               />
             </div>
           )}
         </div>

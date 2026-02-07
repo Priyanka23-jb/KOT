@@ -5,22 +5,26 @@ import { useSelector } from "react-redux";
 import AuthLayout from "../layout/AuthLayout";
 import DashboardLayout from "../layout/DashboardLayout";
 
-import Login from '../features/auth/pages/Login';
-import ForgotPassword from '../features/auth/pages/forgot';
+import Login from "../features/auth/pages/Login";
+import ForgotPassword from "../features/auth/pages/forgot";
 
-import Register from '../features/auth/pages/register'; 
-import Dashboard from '../features/dashboard/pages/Dashboard';
+import Register from "../features/auth/pages/register";
+import Dashboard from "../features/dashboard/pages/Dashboard";
 
 // import Dashboard from '../features/Dashboard/pages/Dashboard';
 
 import Splash from "../features/auth/pages/splash";
+import InnerPage from "../features/auth/pages/innerpage";
+import Joinwithus from "../features/auth/pages/joinwithus"
+import Contact from "../features/auth/pages/contactus"
 
 
 import Help from "../features/help/pages/help";
 
-
-
 // Vendor Components (separate pages)
+import Page from "../features/contain/page"
+import Testimonial from "../features/contain/testimonial"
+import Banner from "../features/contain/banner"
 import CreateVendor from "../features/Vendor/pages/CreateVendor";
 import VendorList from "../features/Vendor/pages/VendorList";
 
@@ -50,20 +54,15 @@ import FireRegistration from "../features/customer/pages/CustomerFire/FireRegist
 // import Subadmin from "../features/Subadmin/pages/Subadmin";
 // import Help from "../features/help/pages/help";
 
-
-
 // Settings Components
 // import Profile from "../features/settings/pages/Profile";
 // import Account from "../features/settings/pages/Account";
-
 
 /**
  * 🔐 Auth Guard
  */
 function RequireAuth() {
-  const isAuthenticated = useSelector(
-    (state) => state.auth.isAuthenticated
-  );
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
@@ -78,25 +77,23 @@ function RequireAuth() {
 export default function AppRoutes() {
   return (
     <Routes>
-
       {/* ========== PUBLIC ROUTES ========== */}
       <Route element={<AuthLayout />}>
-
         {/* SPLASH (ENTRY SCREEN) */}
         <Route path="/" element={<Splash />} />
-
+         <Route path="/innerpage" element={<InnerPage />} />
+         <Route path="/joinwithus" element={<Joinwithus />} />
+         <Route path="/contact" element={<Contact />} />
         {/* AUTH */}
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-
-        <Route path="/register" element={<Register />} /> {/* Fixed: Capital R */}
-
+        <Route path="/register" element={<Register />} />{" "}
+        {/* Fixed: Capital R */}
       </Route>
 
       {/* ========== PROTECTED ROUTES ========== */}
       <Route element={<RequireAuth />}>
         <Route element={<DashboardLayout />}>
-
           {/* MAIN */}
           <Route path="/dashboard" element={<Dashboard />} />
 
@@ -113,7 +110,9 @@ export default function AppRoutes() {
           />
           <Route path="/help" element={<Help />} />
 
-
+          <Route path="/page" element={<Page />} />
+          <Route path="/testimonial" element={<Testimonial />} />
+          <Route path="/banner" element={<Banner />} />
 
           {/* VENDOR SECTION */}
           <Route path="/vendor/list" element={<VendorList />} />
@@ -121,7 +120,10 @@ export default function AppRoutes() {
           {/* <Route path="/vendor/edit/:id" element={<CreateVendor />} /> */}
 
           {/* Optional: Redirect /vendor to /vendor/list */}
-          <Route path="/vendor" element={<Navigate to="/vendor/list" replace />} />
+          <Route
+            path="/vendor"
+            element={<Navigate to="/vendor/list" replace />}
+          />
 
           {/* SUBADMIN SECTION */}
           <Route path="/subadmin/list" element={<SubadminList />} />
@@ -129,7 +131,10 @@ export default function AppRoutes() {
           {/* <Route path="/subadmin/edit/:id" element={<SubadminForm />} /> */}
 
           {/* Optional: Redirect /subadmin to /subadmin/list */}
-          <Route path="/subadmin" element={<Navigate to="/subadmin/list" replace />} />
+          <Route
+            path="/subadmin"
+            element={<Navigate to="/subadmin/list" replace />}
+          />
 
           {/* TECHNICIAN SECTION */}
           <Route path="/technician/list" element={<TechnicianList />} />
@@ -137,7 +142,10 @@ export default function AppRoutes() {
           {/* <Route path="/technician/edit/:id" element={<CreateTechnician />} /> */}
 
           {/* Optional: Redirect /technician to /technician/list */}
-          <Route path="/technician" element={<Navigate to="/technician/list" replace />} />
+          <Route
+            path="/technician"
+            element={<Navigate to="/technician/list" replace />}
+          />
 
           {/* AUDITOR SECTION */}
           <Route path="/auditor/list" element={<AuditorTable />} />
@@ -145,7 +153,10 @@ export default function AppRoutes() {
           {/* <Route path="/auditor/edit/:id" element={<CreateAuditor />} /> */}
 
           {/* Optional: Redirect /auditor to /auditor/list */}
-          <Route path="/auditor" element={<Navigate to="/auditor/list" replace />} />
+          <Route
+            path="/auditor"
+            element={<Navigate to="/auditor/list" replace />}
+          />
 
           {/* MASTER SECTION */}
           {/* <Route path="/master/location-management" element={<LocationManagement />} />
@@ -155,14 +166,11 @@ export default function AppRoutes() {
           {/* SETTINGS SECTION */}
           {/* <Route path="/settings/profile" element={<Profile />} />
           <Route path="/settings/account" element={<Account />} /> */}
-
-
         </Route>
       </Route>
 
       {/* ================= FALLBACK ================= */}
       <Route path="*" element={<Navigate to="/login" replace />} />
-
     </Routes>
   );
 }

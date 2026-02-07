@@ -4,6 +4,7 @@ import { ChevronDown } from "lucide-react";
 
 export default function Sidebar() {
   const [openSections, setOpenSections] = useState({
+    contain: false,
     vendor: false,
     technician: false,
     auditor: false,
@@ -76,6 +77,30 @@ export default function Sidebar() {
         </div>
 
 
+        {/* ================= CONTAIN MANAGEMENT ================= */}
+        <div>
+          <button
+            onClick={() => toggleSection("contain")}
+            className={sectionBtn}
+          >
+            <span className="font-medium">Contain Management</span>
+            <ChevronDown
+              size={16}
+              className={`transition-transform ${
+                openSections.contain ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {openSections.contain && (
+            <div className="ml-4 border-l border-gray-200 dark:border-gray-600 pl-3">
+              <SidebarItem to="/page" label="Page" indent />
+              <SidebarItem to="/testimonial" label="Testimonial" indent />
+              <SidebarItem to="/banner" label="Banner" indent />
+            </div>
+          )}
+        </div>
+
         {/* ================= VENDOR ================= */}
         <div>
           <button
@@ -144,16 +169,8 @@ export default function Sidebar() {
 
           {openSections.auditor && (
             <div className="ml-4 border-l border-gray-200 dark:border-gray-600 pl-3">
-              <SidebarItem
-                to="/auditor/create"
-                label="Create Auditor"
-                indent
-              />
-              <SidebarItem
-                to="/auditor/list"
-                label="Auditor List"
-                indent
-              />
+              <SidebarItem to="/auditor/create" label="Create Auditor" indent />
+              <SidebarItem to="/auditor/list" label="Auditor List" indent />
             </div>
           )}
         </div>
@@ -174,7 +191,11 @@ export default function Sidebar() {
 
           {openSections.subadmin && (
             <div className="ml-4 border-l border-gray-200 dark:border-gray-600 pl-3">
-              <SidebarItem to="/subadmin/create" label="Create Subadmin" indent />
+              <SidebarItem
+                to="/subadmin/create"
+                label="Create Subadmin"
+                indent
+              />
               <SidebarItem to="/subadmin/list" label="Subadmin List" indent />
             </div>
           )}

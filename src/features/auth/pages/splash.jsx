@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import {
@@ -37,6 +38,45 @@ function useInView(options = {}) {
 }
 
 export default function Splash() {
+  const heroSectionRef = useRef(null);
+
+  const backgroundImages = [
+    "https://ultra.realhomes.io/agency/wp-content/uploads/sites/11/2023/09/alex-knight-Ys-DBJeX0nE-unsplash-e1695129806223.jpg",
+    "https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg",
+    "https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg",
+  ];
+
+  const heroContent = [
+    {
+      title: "Book AMC",
+      highlight: "in Minutes",
+      description:
+        "Secure reliable annual maintenance for your equipment with trusted service partners. Fast booking, transparent pricing, and on-time support.",
+    },
+    {
+      title: "Verified AMC",
+      highlight: "Service Providers",
+      description:
+        "Connect with trusted technicians and vendors for reliable and professional maintenance services.",
+    },
+    {
+      title: "Smart Maintenance",
+      highlight: "Made Simple",
+      description:
+        "Quick booking, transparent pricing, and seamless AMC management for your equipment.",
+    },
+  ];
+
+  const [activeBgIndex, setActiveBgIndex] = useState(0);
+
+  useEffect(() => {
+    const sliderInterval = setInterval(() => {
+      setActiveBgIndex((prev) => (prev + 1) % backgroundImages.length);
+    }, 5000);
+
+    return () => clearInterval(sliderInterval);
+  }, [backgroundImages.length]);
+
   const navigate = useNavigate();
   const [heroRef, heroVisible] = useInView();
   const [aboutRef, aboutVisible] = useInView();
@@ -105,114 +145,170 @@ export default function Splash() {
       <div className="hidden md:flex justify-between items-center px-10 py-5 text-[12px] bg-gray-100 text-gray-600">
         {/* Left side */}
         <div className="flex items-center gap-2 ml-72">
-          <span className="text-blue-500">📍</span>
-          <span>1889 NW 79st St, Asheville, NC 98726</span>
+          <span className="text-blue-800">📍</span>
+          <span className="text-sm">b1889 NW 79st St, Asheville, NC 98726</span>
         </div>
 
         {/* Right side */}
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <span className="text-blue-500">📞</span>
-            <span>(800) 543 5432</span>
+            <span className="text-sm">(800) 543 5432</span>
           </div>
 
           <div className="w-px h-4 bg-gray-300"></div>
 
           <div className="flex items-center gap-2 mr-80">
-            <span className="text-blue-500">✉</span>
-            <span>inquiry@bookamc.com</span>
+            <span className="text-blue-500 text-sm">✉</span>
+            <span className="text-sm">inquiry@bookamc.com</span>
           </div>
         </div>
       </div>
 
       {/* HERO SECTION */}
       <section
-        ref={heroRef}
-        className="relative min-h-screen transition-all duration-700 ease-out bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://ultra.realhomes.io/agency/wp-content/uploads/sites/11/2023/09/alex-knight-Ys-DBJeX0nE-unsplash-e1695129806223.jpg')",
-        }}
+        ref={heroSectionRef}
+        className="relative min-h-screen overflow-hidden"
       >
+        {/* BACKGROUND SLIDER */}
+        {backgroundImages.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out ${
+              index === activeBgIndex ? "opacity-100" : "opacity-0"
+            }`}
+            style={{ backgroundImage: `url('${image}')` }}
+          />
+        ))}
+
+        {/* OVERLAY */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/40" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-6 flex flex-col min-h-screen">
+        {/* CONTENT */}
+        <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-6 flex flex-col min-h-screen ml-0 md:ml-72 text-white">
           {/* NAVBAR */}
           <nav className="flex items-center justify-between">
             <div className="text-xl sm:text-2xl font-bold">BOOK AMC</div>
 
-            <div className="hidden md:flex gap-6 text-sm">
+            <div className="hidden md:flex gap-6 text-sm items-center">
               <span className="cursor-pointer hover:text-blue-400">Home</span>
               <span className="cursor-pointer hover:text-blue-400">
-                Fire System
+                <Link
+                  to="/innerpage"
+                  className="cursor-pointer hover:text-blue-400"
+                >
+                  About Company
+                </Link>
               </span>
+
+              {/* SERVICES DROPDOWN */}
+              <div className="relative group">
+                <span className="cursor-pointer hover:text-blue-400 flex items-center gap-1">
+                  Our Services
+                  <svg
+                    className="w-4 h-4 mt-[1px]"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </span>
+
+                <div className="absolute top-full left-0 mt-3 w-56 bg-white text-gray-800 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                  <ul className="py-2 text-sm">
+                    <li className="px-5 py-3 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                      Fire Management
+                    </li>
+                    <li className="px-5 py-3 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                      CCTV Cameras
+                    </li>
+                    <li className="px-5 py-3 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                      STP Service
+                    </li>
+                    <li className="px-5 py-3 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
+                      Solar Service
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
               <span className="cursor-pointer hover:text-blue-400">
-                CCTV Cameras
-              </span>
-              <span className="cursor-pointer hover:text-blue-400">
-                STP Management
-              </span>
-              <span className="cursor-pointer hover:text-blue-400">
-                Solar Systems
+                <Link
+                  to="/contact"
+                  className="hover:text-emerald-500 cursor-pointer"
+                >
+                  Contact
+                </Link>
               </span>
             </div>
 
             <button className="bg-blue-500 hover:bg-blue-600 px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm">
-              Make an Inquiry
+              Inquiry
             </button>
           </nav>
 
           {/* HERO GRID */}
           <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center mt-12 md:mt-0">
-            <div className="text-center md:text-left">
+            {/* LEFT CONTENT — SYNCED WITH IMAGE */}
+            <div className="text-center md:text-left transition-all duration-700 ease-out">
               <h1 className="text-3xl sm:text-4xl lg:text-6xl font-semibold leading-tight mb-6">
-                Book AMC <br className="hidden sm:block" />
-                in Minutes
+                {heroContent[activeBgIndex].title}
+                <br className="hidden sm:block" />
+                {heroContent[activeBgIndex].highlight}
               </h1>
+
               <p className="text-gray-300 max-w-md mx-auto md:mx-0 text-sm sm:text-base">
-                Secure reliable annual maintenance for your equipment with
-                trusted service partners. Fast booking, transparent pricing, and
-                on-time support.
+                {heroContent[activeBgIndex].description}
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl p-6 sm:p-8 text-gray-800 shadow-2xl w-full max-w-md mx-auto md:ml-40">
-              <div className="flex gap-3 mb-6">
-                <button className="flex-1 bg-blue-600 text-white py-2 rounded-full text-sm">
-                  For technician
-                </button>
-                <button className="flex-1 bg-gray-100 py-2 rounded-full text-sm">
-                  For vendor
-                </button>
-              </div>
+            {/* RIGHT FORM (UNCHANGED) */}
+            <div className="max-w-md p-7 rounded-3xl bg-gradient-to-br from-white/90 via-white/80 to-white/70 backdrop-blur-2xl shadow-[0_16px_40px_rgba(0,0,0,0.3)] border border-white/30 ml-0 md:ml-48">
+              <h2 className="text-lg font-semibold mb-4 text-gray-900 whitespace-nowrap">
+                Protect your equipment with smart AMC
+              </h2>
 
-              <div className="space-y-4">
-                {[
-                  "Enter Name",
-                  "Enter Email",
-                  "Enter Contact",
-                  "Enter AMC Plan",
-                ].map((placeholder, i) => (
+              <div className="h-[2px] w-16 bg-purple-500 rounded-full mb-5" />
+
+              <form className="space-y-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <input
-                    key={i}
                     type="text"
-                    placeholder={placeholder}
-                    className="w-full border rounded-lg px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Your Name"
+                    className="w-full rounded-lg px-3 py-2.5 bg-white/70 border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
-                ))}
-              </div>
+                  <input
+                    type="text"
+                    placeholder="Phone Number"
+                    className="w-full rounded-lg px-3 py-2.5 bg-white/70 border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
 
-              <div className="mt-6 flex gap-4">
-                <button className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-700 rounded-lg flex items-center justify-center text-white">
-                  <FaSearch />
-                </button>
+                <input
+                  type="email"
+                  placeholder="Your Email Address"
+                  className="w-full rounded-lg px-3 py-2.5 bg-white/70 border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+
+                <textarea
+                  rows="3"
+                  placeholder="What are you looking for"
+                  className="w-full rounded-lg px-3 py-2.5 bg-white/70 border border-gray-200 text-gray-900 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+
                 <button
-                  onClick={() => navigate("/search")}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium text-sm"
+                  type="submit"
+                  className="mt-3 bg-blue-700 hover:bg-blue-800 text-white font-medium text-sm px-8 py-2.5 rounded-lg transition shadow-md"
                 >
-                  Search
+                  Submit
                 </button>
-              </div>
+              </form>
             </div>
           </div>
         </div>
@@ -264,12 +360,9 @@ export default function Splash() {
   `}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          {/* DIVIDER */}
-          <div className="w-full h-px bg-gray-300/60 mb-12" />
-
           {/* TITLE */}
-          <p className="text-center text-sm md:text-base text-gray-600 mb-14">
-            <span className="text-orange-500 font-semibold"></span> Our Clients
+          <p className="text-3xl font-semibold text-center text-gray-900 mb-16">
+            <span className="text-orange-500 font-semibold"></span> Our clients
           </p>
 
           {/* COMPANIES */}
@@ -333,23 +426,23 @@ export default function Splash() {
       <section className="bg-[#45a9e6] py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           {/* HEADER */}
-          <div className="flex items-center justify-between mb-12">
-            <h2 className="text-3xl md:text-4xl font-semibold text-white">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-12">
+            <h2 className="text-3xl md:text-4xl font-semibold text-white text-center sm:text-left">
               What our customer’s saying
             </h2>
 
-            <div className="flex gap-3">
+            <div className="flex gap-3 justify-center sm:justify-end">
               <button
                 onClick={prev}
                 className="w-10 h-10 rounded-full border border-white/40
-                         text-white hover:bg-white hover:text-[#45a9e6] transition"
+                   text-white hover:bg-white hover:text-[#45a9e6] transition"
               >
                 ‹
               </button>
               <button
                 onClick={next}
                 className="w-10 h-10 rounded-full border border-white/40
-                         text-white hover:bg-white hover:text-[#45a9e6] transition"
+                   text-white hover:bg-white hover:text-[#45a9e6] transition"
               >
                 ›
               </button>
@@ -366,7 +459,14 @@ export default function Splash() {
               }}
             >
               {repeated.map((item, i) => (
-                <div key={i} className="min-w-[33.333%]">
+                <div
+                  key={i}
+                  className="
+              min-w-full
+              sm:min-w-[50%]
+              lg:min-w-[33.333%]
+            "
+                >
                   <div className="bg-white rounded-xl p-6 shadow-lg h-full">
                     <div className="flex items-center gap-3 mb-4">
                       <img
@@ -394,6 +494,239 @@ export default function Splash() {
           </div>
         </div>
       </section>
+
+      <section className="relative bg-white py-20">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+          {/* HEADER */}
+          <div className="text-center max-w-2xl mx-auto mb-20">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900 mb-4">
+              How It Works
+            </h2>
+            <p className="text-gray-600 text-sm sm:text-base">
+              Get your Annual Maintenance Contract in just three simple steps.
+              Reliable service, verified technicians, and complete peace of
+              mind.
+            </p>
+          </div>
+
+          {/* STEPS */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {/* STEP 1 */}
+            <div
+              className="
+          group bg-white rounded-3xl p-8 text-center
+          border border-gray-200
+          shadow-md
+          transition-all duration-500
+          hover:-translate-y-4 hover:shadow-2xl
+        "
+            >
+              <div
+                className="
+            w-24 h-24 mx-auto mb-6
+            rounded-2xl bg-blue-50
+            flex items-center justify-center
+            transition-transform duration-500
+            group-hover:scale-110
+          "
+              >
+                <img
+                  src="https://img.freepik.com/free-vector/online-booking-concept-illustration_114360-4751.jpg"
+                  alt="Choose AMC Service"
+                  className="w-20 h-20 object-contain"
+                />
+              </div>
+
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                Choose AMC Service
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Select the AMC service you need such as Fire Safety, CCTV, STP,
+                or Solar maintenance.
+              </p>
+            </div>
+
+            {/* STEP 2 */}
+            <div
+              className="
+          group bg-white rounded-3xl p-8 text-center
+          border border-gray-200
+          shadow-md
+          transition-all duration-500
+          hover:-translate-y-4 hover:shadow-2xl
+        "
+            >
+              <div
+                className="
+            w-24 h-24 mx-auto mb-6
+            rounded-2xl bg-emerald-50
+            flex items-center justify-center
+            transition-transform duration-500
+            group-hover:scale-110
+          "
+              >
+                <img
+                  src="https://img.freepik.com/free-vector/filling-online-form-concept-illustration_114360-5557.jpg"
+                  alt="Share Details"
+                  className="w-20 h-20 object-contain"
+                />
+              </div>
+
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                Share Your Details
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Fill in your contact details and requirements. We connect you
+                with trusted service partners.
+              </p>
+            </div>
+
+            {/* STEP 3 */}
+            <div
+              className="
+          group bg-white rounded-3xl p-8 text-center
+          border border-gray-200
+          shadow-md
+          transition-all duration-500
+          hover:-translate-y-4 hover:shadow-2xl
+        "
+            >
+              <div
+                className="
+            w-24 h-24 mx-auto mb-6
+            rounded-2xl bg-purple-50
+            flex items-center justify-center
+            transition-transform duration-500
+            group-hover:scale-110
+          "
+              >
+                <img
+                  src="https://img.freepik.com/free-vector/maintenance-technician-concept-illustration_114360-2786.jpg"
+                  alt="AMC Activated"
+                  className="w-20 h-20 object-contain"
+                />
+              </div>
+
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                AMC Activated
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Technician contacts you, schedules the visit, and your AMC is
+                activated with ongoing support.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gray-50 py-20">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+          {/* SECTION HEADER */}
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900 mb-4">
+              Book a Demo
+            </h2>
+            <p className="text-gray-600 text-sm sm:text-base">
+              Schedule a free demo and see how our AMC solutions simplify
+              maintenance for your organization.
+            </p>
+          </div>
+
+          {/* CONTENT */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            {/* LEFT IMAGE CARD */}
+            <div
+              className="
+          group bg-white rounded-3xl border border-gray-200
+          p-6 shadow-md
+          transition-all duration-500
+          hover:-translate-y-2 hover:shadow-2xl
+        "
+            >
+              <div
+                className="
+            w-full h-80 rounded-2xl overflow-hidden
+            bg-gray-100
+            transition-transform duration-500
+            group-hover:scale-[1.02]
+          "
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80"
+                  alt="Book a Demo - AMC Service Consultation"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+
+              <p className="text-sm text-gray-500 mt-4 text-center">
+                Discuss your maintenance needs with our AMC experts
+              </p>
+            </div>
+
+            {/* RIGHT FORM CARD */}
+            <div
+              className="
+          bg-white rounded-3xl border border-gray-200
+          p-8 sm:p-10 shadow-md
+          transition-all duration-500
+          hover:-translate-y-2 hover:shadow-2xl
+        "
+            >
+              <form className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    className="w-full rounded-xl px-4 py-3 border border-gray-200
+                         text-sm text-gray-900 placeholder-gray-500
+                         focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+
+                  <input
+                    type="tel"
+                    placeholder="Phone Number"
+                    className="w-full rounded-xl px-4 py-3 border border-gray-200
+                         text-sm text-gray-900 placeholder-gray-500
+                         focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  className="w-full rounded-xl px-4 py-3 border border-gray-200
+                       text-sm text-gray-900 placeholder-gray-500
+                       focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+
+                <input
+                  type="text"
+                  placeholder="Organization Name"
+                  className="w-full rounded-xl px-4 py-3 border border-gray-200
+                       text-sm text-gray-900 placeholder-gray-500
+                       focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+
+                <button
+                  type="submit"
+                  className="
+              w-full bg-blue-700 hover:bg-blue-800
+              text-white font-medium
+              py-3 rounded-xl
+              transition-all duration-300
+              shadow-lg hover:shadow-2xl
+              active:scale-95
+            "
+                >
+                  Book Demo
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-[#2c6a8f] py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -409,62 +742,59 @@ export default function Splash() {
             </div>
 
             {/* RIGHT CONTENT */}
-            <div className="text-white">
-              <h2 className="text-3xl md:text-4xl font-semibold leading-tight mb-4">
-                Protect Your Equipment with
-                <br /> Smart AMC Plans
-              </h2>
-
-              <p className="text-white/80 mb-8">
-                Affordable annual maintenance contracts designed for homes and
-                businesses.
-              </p>
-
-              {/* FORM */}
-              <form className="space-y-4 max-w-lg">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    placeholder="Your Name"
-                    className="w-full rounded-lg px-4 py-3 bg-white/15
-                             placeholder-white/70 text-white
-                             focus:outline-none focus:ring-2 focus:ring-emerald-400"
-                  />
-
-                  <input
-                    type="text"
-                    placeholder="Phone Number"
-                    className="w-full rounded-lg px-4 py-3 bg-white/15
-                             placeholder-white/70 text-white
-                             focus:outline-none focus:ring-2 focus:ring-emerald-400"
-                  />
+            <div className="ml-0 lg:ml-28 max-w-lg p-8 rounded-3xl bg-transparent backdrop-blur-xl border border-white/40 shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
+              <div className="text-center md:text-left">
+                <div className="flex gap-3 mb-6 justify-center md:justify-start">
+                  <button className="bg-emerald-600 text-white px-6 py-2 rounded-full text-sm shadow">
+                    For technician
+                  </button>
+                  <button className="bg-white/80 px-6 py-2 rounded-full text-sm text-gray-900">
+                    For vendor
+                  </button>
                 </div>
 
-                <input
-                  type="email"
-                  placeholder="Your Email Address"
-                  className="w-full rounded-lg px-4 py-3 bg-white/15
-                           placeholder-white/70 text-white
-                           focus:outline-none focus:ring-2 focus:ring-emerald-400"
-                />
+                <div className="space-y-4 max-w-md mx-auto md:mx-0">
+                  {[
+                    "Enter Name",
+                    "Enter Email",
+                    "Enter Contact",
+                    "Enter AMC Plan",
+                  ].map((placeholder, i) => (
+                    <input
+                      key={i}
+                      type="text"
+                      placeholder={placeholder}
+                      className="
+                  w-full
+                  rounded-xl
+                  px-4
+                  py-3
+                  bg-transparent
+                  border border-white/50
+                  text-sm
+                  text-white
+                  placeholder-white/70
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-emerald-400
+                "
+                    />
+                  ))}
+                </div>
 
-                <textarea
-                  rows="4"
-                  placeholder="What are you looking for"
-                  className="w-full rounded-lg px-4 py-3 bg-white/15
-                           placeholder-white/70 text-white resize-none
-                           focus:outline-none focus:ring-2 focus:ring-emerald-400"
-                />
+                <div className="mt-6 flex gap-4 max-w-md mx-auto md:mx-0">
+                  <button className="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-md">
+                    <FaSearch />
+                  </button>
 
-                <button
-                  type="submit"
-                  className="mt-4 bg-emerald-400 hover:bg-emerald-500
-                           text-white font-medium
-                           px-8 py-3 rounded-lg transition"
-                >
-                  Submit
-                </button>
-              </form>
+                  <button
+                    onClick={() => navigate("/search")}
+                    className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-medium text-sm shadow-md"
+                  >
+                    Search
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -505,43 +835,92 @@ export default function Splash() {
             <div>
               <h4 className="font-semibold text-gray-900 mb-6">Quick Links</h4>
               <ul className="space-y-3 text-sm">
-                <li className="hover:text-emerald-500 cursor-pointer">
-                  Properties Listing
+                <li>
+                  <Link
+                    to="/"
+                    className="hover:text-emerald-500 cursor-pointer"
+                  >
+                    Home
+                  </Link>
                 </li>
-                <li className="hover:text-emerald-500 cursor-pointer">Blog</li>
-                <li className="hover:text-emerald-500 cursor-pointer">
-                  Contact
+                <li>
+                  <Link
+                    to="/Innerpage"
+                    className="hover:text-emerald-500 cursor-pointer"
+                  >
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/innerpage"
+                    className="hover:text-emerald-500 cursor-pointer"
+                  >
+                    Company
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/contact"
+                    className="hover:text-emerald-500 cursor-pointer"
+                  >
+                    Contact Us
+                  </Link>
                 </li>
               </ul>
             </div>
 
             {/* COLUMN 3 — OTHER PAGES */}
             <div>
-              <h4 className="font-semibold text-gray-900 mb-6">Other Pages</h4>
+              <h4 className="font-semibold text-gray-900 mb-6">Services</h4>
               <ul className="space-y-3 text-sm">
-                <li className="hover:text-emerald-500 cursor-pointer">
-                  Agents
+                <li>
+                  <Link
+                    to="/innerpage"
+                    className="hover:text-emerald-500 cursor-pointer"
+                  >
+                    Fire
+                  </Link>
                 </li>
-                <li className="hover:text-emerald-500 cursor-pointer">
-                  Agencies
+                <li>
+                  <Link
+                    to="/innerpage"
+                    className="hover:text-emerald-500 cursor-pointer"
+                  >
+                    CCTV
+                  </Link>
                 </li>
-                <li className="hover:text-emerald-500 cursor-pointer">FAQs</li>
+                <li>
+                  <Link
+                    to="/innerpage"
+                    className="hover:text-emerald-500 cursor-pointer"
+                  >
+                    STP
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/innerpage"
+                    className="hover:text-emerald-500 cursor-pointer"
+                  >
+                    Solar
+                  </Link>
+                </li>
               </ul>
             </div>
 
             {/* COLUMN 4 — EXPERT + SOCIAL */}
             <div>
-              <h4 className="font-semibold text-gray-900 mb-4">
-                Talk To An Expert
-              </h4>
+              <h4 className="font-semibold text-gray-900 mb-4">Join with us</h4>
 
-              <p className="text-sm text-gray-600 mb-6">
-                Get expert consultation regarding you Real Estate needs.
-              </p>
-
-              <button className="border border-emerald-400 text-emerald-500 px-5 py-2 rounded-md text-sm hover:bg-emerald-400 hover:text-white transition">
-                Make an Inquiry
-              </button>
+              <ul className="space-y-3 text-sm">
+                <li className="hover:text-emerald-500 cursor-pointer">
+                  Vendor
+                </li>
+                <li className="hover:text-emerald-500 cursor-pointer">
+                  Technician
+                </li>
+              </ul>
 
               <div className="mt-8">
                 <p className="font-semibold text-gray-900 mb-4">
@@ -569,20 +948,6 @@ export default function Splash() {
       </footer>
 
       {/* SOCIAL ICONS */}
-      <div className="hidden md:flex fixed right-4 top-1/2 -translate-y-1/2 z-50 flex-col gap-4">
-        <Icon link="https://linkedin.com" bg="#0A66C2">
-          <FaLinkedinIn />
-        </Icon>
-        <Icon link="https://facebook.com" bg="#1877F2">
-          <FaFacebookF />
-        </Icon>
-        <Icon link="https://instagram.com" gradient>
-          <FaInstagram />
-        </Icon>
-        <Icon link="https://youtube.com" bg="#FF0000">
-          <FaYoutube />
-        </Icon>
-      </div>
     </div>
   );
 }

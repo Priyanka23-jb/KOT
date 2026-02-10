@@ -39,6 +39,8 @@ import LocationManagement from "../features/Master/pages/LocationManagement";
 import Category from "../features/Master/pages/Category";
 import Department from "../features/Master/pages/Department";
 import Designation from "../features/Master/pages/Designation";
+import OrganisationType from "../features/Master/pages/OrganisationType";
+import OccupationType from "../features/Master/pages/OccupationType";
 
 
 // Auditor Components (separate pages)
@@ -154,6 +156,8 @@ export default function AppRoutes() {
           <Route path="/category" element={<Category />} />
           <Route path="/department" element={<Department />} />
           <Route path="/designation" element={<Designation />} />
+          <Route path="/organisation" element={<OrganisationType />} />
+          <Route path="/occupation" element={<OccupationType />} />
  
           
 

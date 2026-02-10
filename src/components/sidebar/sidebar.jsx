@@ -236,6 +236,16 @@ export default function Sidebar() {
                 label="Designation"
                  indent 
                />
+              <SidebarItem
+               to="/organisation"
+                label="Organisation Type"
+                 indent 
+               />
+              <SidebarItem
+               to="/occupation"
+                label="Occupation Type"
+                 indent 
+               />
             </div>
           )}
         </div>

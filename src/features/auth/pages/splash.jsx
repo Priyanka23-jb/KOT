@@ -142,25 +142,28 @@ export default function Splash() {
   return (
     <div className="w-full min-h-screen text-white overflow-x-hidden">
       {/* TOP INFO BAR */}
-      <div className="hidden md:flex justify-between items-center px-10 py-5 text-[12px] bg-gray-100 text-gray-600">
-        {/* Left side */}
-        <div className="flex items-center gap-2 ml-72">
-          <span className="text-blue-800">📍</span>
-          <span className="text-sm">b1889 NW 79st St, Asheville, NC 98726</span>
-        </div>
-
-        {/* Right side */}
-        <div className="flex items-center gap-4">
+      {/* ================= TOP INFO BAR ================= */}
+      <div className="hidden md:block bg-gray-100 text-gray-600 text-xs">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-4 lg:px-10 py-3">
           <div className="flex items-center gap-2">
-            <span className="text-blue-500">📞</span>
-            <span className="text-sm">(800) 543 5432</span>
+            <span className="text-blue-800">📍</span>
+            <span className="text-sm">
+              b1889 NW 79st St, Asheville, NC 98726
+            </span>
           </div>
 
-          <div className="w-px h-4 bg-gray-300"></div>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2">
+              <span className="text-blue-500">📞</span>
+              <span className="text-sm">(800) 543 5432</span>
+            </div>
 
-          <div className="flex items-center gap-2 mr-80">
-            <span className="text-blue-500 text-sm">✉</span>
-            <span className="text-sm">inquiry@bookamc.com</span>
+            <div className="w-px h-4 bg-gray-300" />
+
+            <div className="flex items-center gap-2">
+              <span className="text-blue-500">✉</span>
+              <span className="text-sm">inquiry@bookamc.com</span>
+            </div>
           </div>
         </div>
       </div>
@@ -170,43 +173,39 @@ export default function Splash() {
         ref={heroSectionRef}
         className="relative min-h-screen overflow-hidden"
       >
-        {/* BACKGROUND SLIDER */}
-        {backgroundImages.map((image, index) => (
+        {/* Background Slider */}
+        {backgroundImages.map((img, index) => (
           <div
             key={index}
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out ${
+            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
               index === activeBgIndex ? "opacity-100" : "opacity-0"
             }`}
-            style={{ backgroundImage: `url('${image}')` }}
+            style={{ backgroundImage: `url(${img})` }}
           />
         ))}
 
-        {/* OVERLAY */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/40" />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
 
-        {/* CONTENT */}
-        <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-6 flex flex-col min-h-screen ml-0 md:ml-72 text-white">
-          {/* NAVBAR */}
-          <nav className="flex items-center justify-between">
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 min-h-screen flex flex-col text-white">
+          {/* ================= NAVBAR ================= */}
+          <nav className="flex items-center justify-between py-6">
             <div className="text-xl sm:text-2xl font-bold">BOOK AMC</div>
 
-            <div className="hidden md:flex gap-6 text-sm items-center">
-              <span className="cursor-pointer hover:text-blue-400">Home</span>
-              <span className="cursor-pointer hover:text-blue-400">
-                <Link
-                  to="/innerpage"
-                  className="cursor-pointer hover:text-blue-400"
-                >
-                  About Company
-                </Link>
-              </span>
+            <div className="hidden lg:flex items-center gap-6 text-sm">
+              <span className="hover:text-blue-400 cursor-pointer">Home</span>
 
-              {/* SERVICES DROPDOWN */}
+              <Link to="/innerpage" className="hover:text-blue-400">
+                About Company
+              </Link>
+
+              {/* Dropdown */}
               <div className="relative group">
-                <span className="cursor-pointer hover:text-blue-400 flex items-center gap-1">
+                <span className="flex items-center gap-1 cursor-pointer hover:text-blue-400">
                   Our Services
                   <svg
-                    className="w-4 h-4 mt-[1px]"
+                    className="w-4 h-4"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
@@ -220,57 +219,53 @@ export default function Splash() {
                   </svg>
                 </span>
 
-                <div className="absolute top-full left-0 mt-3 w-56 bg-white text-gray-800 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                <div className="absolute left-0 mt-3 w-56 bg-white text-gray-800 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
                   <ul className="py-2 text-sm">
-                    <li className="px-5 py-3 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
-                      Fire Management
-                    </li>
-                    <li className="px-5 py-3 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
-                      CCTV Cameras
-                    </li>
-                    <li className="px-5 py-3 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
-                      STP Service
-                    </li>
-                    <li className="px-5 py-3 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">
-                      Solar Service
-                    </li>
+                    {[
+                      "Fire Management",
+                      "CCTV Cameras",
+                      "STP Service",
+                      "Solar Service",
+                    ].map((item) => (
+                      <li
+                        key={item}
+                        className="px-5 py-3 hover:bg-blue-50 hover:text-blue-600 cursor-pointer"
+                      >
+                        {item}
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
 
-              <span className="cursor-pointer hover:text-blue-400">
-                <Link
-                  to="/contact"
-                  className="hover:text-emerald-500 cursor-pointer"
-                >
-                  Contact
-                </Link>
-              </span>
+              <Link to="/contact" className="hover:text-emerald-400">
+                Contact
+              </Link>
             </div>
 
             <button className="bg-blue-500 hover:bg-blue-600 px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm">
-              Inquiry
+              Book a demo
             </button>
           </nav>
 
-          {/* HERO GRID */}
-          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center mt-12 md:mt-0">
-            {/* LEFT CONTENT — SYNCED WITH IMAGE */}
-            <div className="text-center md:text-left transition-all duration-700 ease-out">
+          {/* ================= HERO GRID ================= */}
+          <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left Content */}
+            <div className="text-center lg:text-left transition-all duration-700">
               <h1 className="text-3xl sm:text-4xl lg:text-6xl font-semibold leading-tight mb-6">
                 {heroContent[activeBgIndex].title}
                 <br className="hidden sm:block" />
                 {heroContent[activeBgIndex].highlight}
               </h1>
 
-              <p className="text-gray-300 max-w-md mx-auto md:mx-0 text-sm sm:text-base">
+              <p className="text-gray-300 max-w-md mx-auto lg:mx-0 text-sm sm:text-base">
                 {heroContent[activeBgIndex].description}
               </p>
             </div>
 
-            {/* RIGHT FORM (UNCHANGED) */}
-            <div className="max-w-md p-7 rounded-3xl bg-gradient-to-br from-white/90 via-white/80 to-white/70 backdrop-blur-2xl shadow-[0_16px_40px_rgba(0,0,0,0.3)] border border-white/30 ml-0 md:ml-48">
-              <h2 className="text-lg font-semibold mb-4 text-gray-900 whitespace-nowrap">
+            {/* Right Form */}
+            <div className="max-w-md w-full mx-auto lg:mx-0 p-7 rounded-3xl bg-gradient-to-br from-white/90 via-white/80 to-white/70 backdrop-blur-2xl shadow-[0_16px_40px_rgba(0,0,0,0.3)] border border-white/30">
+              <h2 className="text-lg font-semibold mb-4 text-gray-900">
                 Protect your equipment with smart AMC
               </h2>
 
@@ -281,32 +276,32 @@ export default function Splash() {
                   <input
                     type="text"
                     placeholder="Your Name"
-                    className="w-full rounded-lg px-3 py-2.5 bg-white/70 border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full rounded-lg px-3 py-2.5 bg-white border border-gray-200 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                   />
                   <input
                     type="text"
                     placeholder="Phone Number"
-                    className="w-full rounded-lg px-3 py-2.5 bg-white/70 border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full rounded-lg px-3 py-2.5 bg-white border border-gray-200 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                   />
                 </div>
 
                 <input
                   type="email"
                   placeholder="Your Email Address"
-                  className="w-full rounded-lg px-3 py-2.5 bg-white/70 border border-gray-200 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full rounded-lg px-3 py-2.5 bg-white border border-gray-200 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                 />
 
                 <textarea
                   rows="3"
-                  placeholder="What are you looking for"
-                  className="w-full rounded-lg px-3 py-2.5 bg-white/70 border border-gray-200 text-gray-900 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="What are you looking for?"
+                  className="w-full rounded-lg px-3 py-2.5 bg-white border border-gray-200 text-sm resize-none focus:ring-2 focus:ring-blue-500 outline-none"
                 />
 
                 <button
                   type="submit"
-                  className="mt-3 bg-blue-700 hover:bg-blue-800 text-white font-medium text-sm px-8 py-2.5 rounded-lg transition shadow-md"
+                  className="w-full mt-3 bg-blue-700 hover:bg-blue-800 text-white font-medium text-sm px-8 py-2.5 rounded-lg transition"
                 >
-                  Submit
+                  Submit Inquiry
                 </button>
               </form>
             </div>
@@ -619,114 +614,6 @@ export default function Splash() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-20">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-          {/* SECTION HEADER */}
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900 mb-4">
-              Book a Demo
-            </h2>
-            <p className="text-gray-600 text-sm sm:text-base">
-              Schedule a free demo and see how our AMC solutions simplify
-              maintenance for your organization.
-            </p>
-          </div>
-
-          {/* CONTENT */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            {/* LEFT IMAGE CARD */}
-            <div
-              className="
-          group bg-white rounded-3xl border border-gray-200
-          p-6 shadow-md
-          transition-all duration-500
-          hover:-translate-y-2 hover:shadow-2xl
-        "
-            >
-              <div
-                className="
-            w-full h-80 rounded-2xl overflow-hidden
-            bg-gray-100
-            transition-transform duration-500
-            group-hover:scale-[1.02]
-          "
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80"
-                  alt="Book a Demo - AMC Service Consultation"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-
-              <p className="text-sm text-gray-500 mt-4 text-center">
-                Discuss your maintenance needs with our AMC experts
-              </p>
-            </div>
-
-            {/* RIGHT FORM CARD */}
-            <div
-              className="
-          bg-white rounded-3xl border border-gray-200
-          p-8 sm:p-10 shadow-md
-          transition-all duration-500
-          hover:-translate-y-2 hover:shadow-2xl
-        "
-            >
-              <form className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <input
-                    type="text"
-                    placeholder="Your Name"
-                    className="w-full rounded-xl px-4 py-3 border border-gray-200
-                         text-sm text-gray-900 placeholder-gray-500
-                         focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    className="w-full rounded-xl px-4 py-3 border border-gray-200
-                         text-sm text-gray-900 placeholder-gray-500
-                         focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  className="w-full rounded-xl px-4 py-3 border border-gray-200
-                       text-sm text-gray-900 placeholder-gray-500
-                       focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-
-                <input
-                  type="text"
-                  placeholder="Organization Name"
-                  className="w-full rounded-xl px-4 py-3 border border-gray-200
-                       text-sm text-gray-900 placeholder-gray-500
-                       focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-
-                <button
-                  type="submit"
-                  className="
-              w-full bg-blue-700 hover:bg-blue-800
-              text-white font-medium
-              py-3 rounded-xl
-              transition-all duration-300
-              shadow-lg hover:shadow-2xl
-              active:scale-95
-            "
-                >
-                  Book Demo
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="bg-[#2c6a8f] py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -963,7 +850,7 @@ const images = () => [
 const services = () => [
   {
     icon: "🔥",
-    title: "FIRE",
+    title: "FIRE SAFTY",
     desc: "Ensure complete fire safety compliance with centralized monitoring of fire alarms, extinguishers, hydrants, and emergency systems. Track inspections, maintenance schedules, certifications, and readiness status to keep your premises safe and audit-ready at all times.",
   },
   {
@@ -973,7 +860,7 @@ const services = () => [
   },
   {
     icon: "💧",
-    title: "STP",
+    title: "WATER TREATMENT",
     desc: "Monitor and manage STP operations efficiently by tracking plant performance, maintenance activities, water treatment processes, and environmental compliance. Ensure smooth operations while meeting regulatory and sustainability standards.",
   },
   {

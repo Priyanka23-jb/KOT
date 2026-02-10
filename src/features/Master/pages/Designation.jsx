@@ -1,0 +1,275 @@
+
+import React, { useState, useMemo } from "react";
+import {
+  Search,
+  Filter,
+  Edit,
+  Trash2,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+
+/* ------------------ STATIC DEPARTMENTS ------------------ */
+const departments = [
+  { id: 1, name: "Operations" },
+  { id: 2, name: "Finance" },
+  { id: 3, name: "Human Resources" },
+  { id: 4, name: "IT Support" },
+  { id: 5, name: "Administration" },
+];
+
+export default function Designation() {
+  /* ------------------ STATE ------------------ */
+  const [designationName, setDesignationName] = useState("");
+  const [departmentId, setDepartmentId] = useState("");
+  const [search, setSearch] = useState("");
+  const [perPage, setPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const [designations, setDesignations] = useState([
+    { id: 1, name: "Manager", department: "Operations", status: "Active" },
+    { id: 2, name: "Supervisor", department: "Finance", status: "Active" },
+    { id: 3, name: "Executive", department: "Human Resources", status: "Inactive" },
+    { id: 4, name: "Assistant", department: "IT Support", status: "Pending" },
+    { id: 5, name: "Team Lead", department: "Administration", status: "Active" },
+  ]);
+
+  /* ------------------ DERIVED DATA ------------------ */
+  const filteredData = useMemo(() => {
+    return designations.filter(
+      (item) =>
+        item.name.toLowerCase().includes(search.toLowerCase()) ||
+        item.department.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [designations, search]);
+
+  const totalItems = filteredData.length;
+  const totalPages = Math.ceil(totalItems / perPage);
+  const startIndex = (currentPage - 1) * perPage;
+  const endIndex = Math.min(startIndex + perPage, totalItems);
+  const paginatedData = filteredData.slice(startIndex, endIndex);
+
+  /* ------------------ HELPERS ------------------ */
+  const getStatusColor = (status) => {
+    switch (status.toLowerCase()) {
+      case "active":
+        return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300";
+      case "inactive":
+        return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300";
+      case "pending":
+        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300";
+      default:
+        return "bg-gray-100 text-gray-800";
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!designationName || !departmentId) return;
+
+    const department = departments.find(
+      (d) => d.id === Number(departmentId)
+    );
+
+    setDesignations((prev) => [
+      ...prev,
+      {
+        id: prev.length + 1,
+        name: designationName,
+        department: department.name,
+        status: "Active",
+      },
+    ]);
+
+    setDesignationName("");
+    setDepartmentId("");
+  };
+
+  /* ------------------ UI ------------------ */
+  return (
+    <div className="p-6">
+      <div className="grid grid-cols-12 gap-6">
+
+        {/* ADD DESIGNATION */}
+        <div className="col-span-12 lg:col-span-4 bg-white dark:bg-gray-800 rounded-xl shadow-md p-5">
+          <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">
+            Add Designation
+          </h2>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+                Designation Name
+              </label>
+              <input
+                value={designationName}
+                onChange={(e) => setDesignationName(e.target.value)}
+                placeholder="Enter designation name"
+                className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600
+                           bg-white dark:bg-gray-700 text-gray-800 dark:text-white
+                           focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">
+                Department
+              </label>
+              <select
+                value={departmentId}
+                onChange={(e) => setDepartmentId(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600
+                           bg-white dark:bg-gray-700 text-gray-800 dark:text-white
+                           focus:ring-2 focus:ring-purple-500"
+              >
+                <option value="">Select Department</option>
+                {departments.map((dept) => (
+                  <option key={dept.id} value={dept.id}>
+                    {dept.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="pt-3 text-right">
+              <button className="px-5 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-purple-700
+                                 text-white text-sm hover:from-purple-700 hover:to-purple-800 shadow">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+
+        {/* DESIGNATION LIST */}
+        <div className="col-span-12 lg:col-span-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+
+          {/* Toolbar */}
+          <div className="p-4 border-b border-gray-200 dark:border-gray-700
+                          flex flex-col lg:flex-row justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="relative w-64">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <input
+                  value={search}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  placeholder="Search designation or department..."
+                  className="w-full pl-9 pr-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600
+                             bg-white dark:bg-gray-700 text-sm text-gray-800 dark:text-white
+                             focus:ring-2 focus:ring-purple-500"
+                />
+              </div>
+
+              <button className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600
+                                 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300
+                                 flex items-center gap-2">
+                <Filter size={16} />
+                Filter
+              </button>
+            </div>
+
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              Showing {startIndex + 1} to {endIndex} of {totalItems} results
+            </div>
+          </div>
+
+          {/* Table */}
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="bg-purple-50 dark:bg-purple-900/20">
+                <tr>
+                  <th className="p-3 text-left">#</th>
+                  <th className="p-3 text-left">Designation</th>
+                  <th className="p-3 text-left">Department</th>
+                  <th className="p-3 text-left">Status</th>
+                  <th className="p-3 text-center">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                {paginatedData.map((item, index) => (
+                  <tr key={item.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                    <td className="p-3">{startIndex + index + 1}</td>
+                    <td className="p-3 font-medium">{item.name}</td>
+                    <td className="p-3">{item.department}</td>
+                    <td className="p-3">
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
+                        {item.status}
+                      </span>
+                    </td>
+                    <td className="p-3 text-center">
+                      <div className="flex justify-center gap-2">
+                        <button className="p-1.5 rounded-md hover:bg-blue-50 dark:hover:bg-blue-900/20 text-blue-600">
+                          <Edit size={14} />
+                        </button>
+                        <button className="p-1.5 rounded-md hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600">
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+
+                {paginatedData.length === 0 && (
+                  <tr>
+                    <td colSpan="5" className="p-6 text-center text-gray-500 dark:text-gray-400">
+                      No designations found
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Pagination */}
+          <div className="border-t border-gray-200 dark:border-gray-700 px-6 py-4
+                          flex flex-col lg:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+              Rows per page:
+              <select
+                value={perPage}
+                onChange={(e) => {
+                  setPerPage(Number(e.target.value));
+                  setCurrentPage(1);
+                }}
+                className="px-2 py-1 rounded border border-gray-300 dark:border-gray-600
+                           bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+              >
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+              </select>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setCurrentPage((p) => p - 1)}
+                disabled={currentPage === 1}
+                className="p-2 rounded-lg border border-gray-300 dark:border-gray-600
+                           bg-white dark:bg-gray-700 disabled:opacity-50"
+              >
+                <ChevronLeft size={16} />
+              </button>
+
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                Page {currentPage} of {totalPages}
+              </span>
+
+              <button
+                onClick={() => setCurrentPage((p) => p + 1)}
+                disabled={currentPage === totalPages}
+                className="p-2 rounded-lg border border-gray-300 dark:border-gray-600
+                           bg-white dark:bg-gray-700 disabled:opacity-50"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+}
